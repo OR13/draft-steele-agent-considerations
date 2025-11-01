@@ -83,7 +83,7 @@ This document builds upon established IETF practices for consideration sections 
 
 {::boilerplate bcp14-tagged}
 
-# Considerations Sections
+# Processing Considerations Sections
 
 IETF documents commonly include dedicated sections addressing security, privacy, and operational aspects of protocols and technologies. These consideration sections serve multiple critical purposes: they guide document authors in performing due diligence during protocol design, inform implementers and deployers about potential risks and design trade-offs, and provide structured guidance for agents assisting developers in producing software implementations.
 
