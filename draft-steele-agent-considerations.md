@@ -341,6 +341,259 @@ To enable effective MCP-based agent interaction with specifications:
 
 By identifying relevant MCP resources, prompts, and tools for their specifications, authors enable agents to provide more effective implementation assistance for media types and protocol formats.
 
+# Agent2Agent Protocol Support
+
+The Agent2Agent Protocol (A2A) {{A2A}} is an open standard enabling communication between independent AI agent systems. A2A facilitates agent-to-agent communication through capability discovery, task delegation, and collaborative work on complex requests. Unlike MCP which focuses on LLM application integration with data sources, A2A targets inter-agent communication in distributed agentic ecosystems.
+
+For authors of internet drafts, A2A provides a framework for exposing specification capabilities as discoverable agent skills. This section guides authors in determining how media types, protocol formats, and operations defined in their specifications should be exposed through A2A Agent Cards, skills, and task interfaces.
+
+## A2A Agent Cards for Specifications
+
+An Agent Card is a JSON manifest describing an agent's identity, capabilities, authentication requirements, and supported operations. When a specification defines media types or protocol operations, authors should consider what would appear in an Agent Card for an agent implementing that specification:
+
+**Media Type Support**: Agent Cards declare supported content types through input and output modes:
+
+- `defaultInputModes`: MIME types the agent accepts (e.g., `["application/example+json", "application/example+cbor"]`)
+- `defaultOutputModes`: MIME types the agent produces
+- Per-skill mode overrides for operations with specific format requirements
+
+**Transport Protocols**: Agent Cards specify available transports:
+
+- `preferredTransport`: Primary protocol binding (JSON-RPC, gRPC, or HTTP+JSON)
+- `additionalInterfaces`: Alternative transport endpoints
+- `url`: Primary endpoint for accessing the agent
+
+**Authentication Requirements**: Agent Cards declare security schemes:
+
+- `securitySchemes`: Authentication methods (Bearer tokens, API keys, OAuth2)
+- `security`: Required authentication for agent access
+- Skill-level security requirements for operation-specific authorization
+
+**Protocol Capabilities**: Agent Cards indicate protocol features:
+
+- Streaming support for incremental results
+- Push notification capability for asynchronous operations
+- State transition history support for auditability
+
+## A2A Skills for Specification Operations
+
+Skills represent distinct agent capabilities corresponding to operations defined in specifications. Authors should identify which specification operations map to A2A skills:
+
+**Protocol Operation Skills**: Each protocol operation becomes a skill:
+
+- **Identification**: Unique skill ID (e.g., `validate-credential`, `issue-token`)
+- **Description**: Clear explanation of what the operation does
+- **Examples**: Sample requests showing how to invoke the operation
+- **Input/Output Modes**: Media types consumed and produced by the operation
+
+**Format Transformation Skills**: Skills for converting between formats:
+
+- Skills for encoding transformations (JSON to CBOR, canonical form generation)
+- Skills for version migration (v1 format to v2 format)
+- Skills for format validation and verification
+
+**Validation Skills**: Skills for checking conformance:
+
+- Schema validation skills that verify instances against formal definitions
+- Protocol compliance skills that check message format correctness
+- Semantic validation skills that enforce business rules
+
+**Query and Retrieval Skills**: Skills for accessing specification artifacts:
+
+- Skills to retrieve schema definitions
+- Skills to fetch example instances
+- Skills to query specification metadata
+
+## A2A Messages, Parts, and Artifacts
+
+A2A structures communication through messages containing parts, with outputs delivered as artifacts. Authors should consider how specification data maps to these structures:
+
+**Message Structure**: Messages have a role (`user` or `agent`) and contain parts:
+
+- User messages containing protocol requests
+- Agent messages containing protocol responses
+- Multi-turn conversations for stateful protocol interactions
+
+**Part Types for Specification Data**:
+
+**TextPart**: Plain text content appropriate for:
+- Human-readable explanations
+- Log messages and diagnostic output
+- Textual protocol representations
+
+**FilePart**: File content with MIME type, suitable for:
+- Media type instances as files
+- Large protocol messages
+- Binary format examples
+- References via URI or embedded bytes
+
+**DataPart**: Structured JSON data, ideal for:
+- Protocol parameters and configuration
+- Structured validation results
+- Metadata about media types or formats
+- API request/response payloads
+
+**Artifacts for Protocol Outputs**: Artifacts contain generated outputs:
+- Valid instances of media types produced by generation skills
+- Validation reports from conformance checking skills
+- Transformed data from format conversion skills
+- Test vectors for interoperability verification
+
+## A2A Tasks for Protocol Operations
+
+Tasks represent work units with defined lifecycle states. Protocol operations exposed through A2A become tasks with specific characteristics:
+
+**Task States for Protocol Operations**:
+
+- `queued`: Operation accepted but not yet started
+- `in-progress`: Protocol operation executing
+- `auth-required`: Operation needs additional authorization
+- `input-required`: Operation needs more parameters
+- `completed`: Protocol operation succeeded, artifacts contain results
+- `rejected`: Operation request invalid or malformed
+- `failed`: Protocol operation encountered error
+- `canceled`: Operation terminated by client request
+
+**Task History**: Protocol interactions recorded as message turns:
+- Initial request with operation parameters
+- Intermediate status updates for long-running operations
+- Final response with operation results
+
+**Task Context**: Related protocol operations grouped by context identifier:
+- Multiple operations in a protocol session share context
+- Stateful protocols maintain context across task sequences
+
+**Asynchronous Operations**: Long-running protocol operations use push notifications:
+- Client registers webhook for status updates
+- Agent sends notifications as operation progresses
+- Client retrieves final artifacts when task completes
+
+## Media Type Specific Guidance for A2A
+
+When specifications define media types, authors should document how they appear in A2A interfaces:
+
+**Agent Card Media Type Declaration**:
+
+~~~json
+{
+  "defaultInputModes": ["application/example+json"],
+  "defaultOutputModes": ["application/example+json"],
+  "skills": [
+    {
+      "id": "parse-example",
+      "name": "Parse Example Format",
+      "description": "Parse and validate application/example+json instances",
+      "inputModes": ["application/example+json"],
+      "outputModes": ["application/json"]
+    }
+  ]
+}
+~~~
+
+**Media Type Processing Skills**: Define skills for each media type operation:
+
+- Parsing skills that accept media type instances as FilePart inputs
+- Serialization skills that produce media type instances as FilePart outputs
+- Validation skills that check media type conformance
+
+**Media Type Parameters**: Handle media type parameters through DataPart:
+
+- Parameters passed as structured JSON in DataPart
+- Validation results returned as DataPart with structured diagnostics
+- Configuration options specified via DataPart
+
+**Content Negotiation**: Specify multiple output modes in skills:
+
+- List all supported encoding variants in `outputModes`
+- Client requests preferred format through task parameters
+- Agent returns content in negotiated format
+
+## Protocol Format Specific Guidance for A2A
+
+For specifications defining protocol formats, authors should document A2A exposure:
+
+**Protocol Message Skills**: Define skills for protocol operations:
+
+~~~json
+{
+  "id": "protocol-request",
+  "name": "Process Protocol Request",
+  "description": "Handle protocol request message per RFC XXXX",
+  "inputModes": ["application/protocol+cbor"],
+  "outputModes": ["application/protocol+cbor"],
+  "examples": [
+    "Process authentication request",
+    "Handle data query message"
+  ]
+}
+~~~
+
+**Wire Format Handling**: Protocol formats map to A2A parts:
+
+- Binary protocol messages as FilePart with appropriate MIME type
+- Protocol parameters as DataPart with structured JSON
+- Protocol responses as artifacts containing FilePart outputs
+
+**State Machine Operations**: Protocol states map to task states:
+
+- Protocol session establishment creates task with context
+- Protocol state transitions reflected in task status updates
+- Protocol session termination completes or cancels task
+
+**Multi-Message Protocols**: Conversational protocols use task history:
+
+- Each protocol message becomes a message turn in task history
+- Client and agent roles map to protocol participants
+- Context groups related protocol message exchanges
+
+**Transport Binding**: Protocol formats support multiple A2A transports:
+
+- JSON-RPC for protocols with RPC-like semantics
+- gRPC for protocols requiring high performance
+- HTTP+JSON for protocols with RESTful patterns
+
+## Streaming and Asynchronous Protocol Operations
+
+A2A provides streaming and push notification capabilities for protocol operations:
+
+**Streaming Protocol Responses**: Use `message/stream` for incremental output:
+
+- Protocol operations producing progressive results stream via SSE
+- Status updates delivered as events during protocol execution
+- Partial artifacts available before protocol completion
+
+**Push Notifications**: Long-running protocol operations use webhooks:
+
+- Client configures push notification endpoint in task parameters
+- Agent sends notifications as protocol progresses through states
+- Client polls or retrieves final artifacts when notified of completion
+
+**Human-in-the-Loop Protocols**: Protocols requiring user interaction:
+
+- Task enters `input-required` state when user action needed
+- Agent specifies required input through status message
+- Client provides input in subsequent message, task resumes
+
+## Recommendations for Authors
+
+To enable effective A2A-based agent interaction with specifications:
+
+1. **Define Agent Card structure**: Specify what an Agent Card should contain for agents implementing the specification, including supported media types, available skills, and authentication requirements.
+
+2. **Map operations to skills**: Identify each protocol operation or media type operation that should be exposed as an A2A skill, with clear descriptions and examples.
+
+3. **Specify message structure**: Document how protocol data maps to TextPart, FilePart, and DataPart, including MIME types for file content.
+
+4. **Document task lifecycle**: Describe what task states are relevant to protocol operations and what each state signifies.
+
+5. **Address transport protocols**: Indicate which A2A transport protocols (JSON-RPC, gRPC, HTTP+JSON) are appropriate for the specification's operations.
+
+6. **Include Agent Card examples**: Provide sample Agent Card JSON showing how the specification's capabilities should be declared.
+
+7. **Specify asynchronous handling**: For long-running operations, document how streaming or push notifications should be used.
+
+By defining how specifications map to A2A Agent Cards, skills, and tasks, authors enable independent agents to discover and interoperate with implementations of their specifications through standardized agent-to-agent communication.
+
 # Security Considerations
 
 ## Prompt Injection
