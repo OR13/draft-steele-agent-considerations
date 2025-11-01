@@ -39,6 +39,16 @@ informative:
   RFC3552: SECURITY-CONSIDERATIONS
   RFC5706: OPERATIONAL-CONSIDERATIONS
 
+  MCP:
+    title: Model Context Protocol
+    target: https://modelcontextprotocol.io/specification/2025-06-18
+    date: 2025-06-18
+
+  A2A:
+    title: Agent2Agent (A2A) Protocol Official Specification
+    target: https://a2a-protocol.org/latest/specification/
+    date: 2025-06-18
+
 ...
 
 --- abstract
@@ -67,9 +77,6 @@ This document defines the use of an "Agent Consideration" section within IETF sp
 The Agent Consideration section defined in this document can be added to any Internet-Draft that includes normative language and sufficient expressive examples derived from included data models and protocol interaction definitions. By providing this structured guidance, specification authors can enable more accurate and efficient code generation while maintaining the human readability and clarity that IETF documents are known for.
 
 This document builds upon established IETF practices for consideration sections (security, privacy, and operational considerations) by adding a new consideration type focused on enabling automated implementation assistance. Just as security considerations help implementers understand threats and protections, Agent Considerations help implementing agents understand how to correctly translate specification text into executable code.
-
-
-
 
 
 # Conventions and Definitions
