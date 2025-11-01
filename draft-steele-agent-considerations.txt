@@ -2,8 +2,8 @@
 
 
 
-WG Working Group                                              Y. N. Here
-Internet-Draft                                    Your Organization Here
+Network Working Group                                          O. Steele
+Internet-Draft                                              Tradeverifyd
 Intended status: Informational                           1 November 2025
 Expires: 5 May 2026
 
@@ -20,16 +20,13 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-steele-agent-
-   considerations/.
-
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
+   https://OR13.github.io/draft-steele-agent-considerations/draft-
+   steele-agent-considerations.html.  Status information for this
+   document may be found at https://datatracker.ietf.org/doc/draft-
+   steele-agent-considerations/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/OR13/draft-steele-agent-considerations.
 
 Status of This Memo
 
@@ -66,9 +63,15 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Security Considerations
-   4.  IANA Considerations
-   5.  Normative References
+   3.  Considerations Sections
+     3.1.  Value to Authors and Implementers
+     3.2.  Value to Agents Assisting Implementation
+     3.3.  Guidance for Authors
+   4.  Security Considerations
+   5.  IANA Considerations
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -84,15 +87,171 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-3.  Security Considerations
+3.  Considerations Sections
+
+   IETF documents commonly include dedicated sections addressing
+   security, privacy, and operational aspects of protocols and
+   technologies.  These consideration sections serve multiple critical
+   purposes: they guide document authors in performing due diligence
+   during protocol design, inform implementers and deployers about
+   potential risks and design trade-offs, and provide structured
+   guidance for agents assisting developers in producing software
+   implementations.
+
+3.1.  Value to Authors and Implementers
+
+   When developing specifications that involve agents—whether autonomous
+   systems, software agents, or AI-driven components—authors should
+   carefully evaluate the applicability of established consideration
+   frameworks.  These frameworks provide systematic approaches to
+   identifying and documenting design choices that affect security,
+   privacy, and operations.
+
+   *Security Considerations*: All IETF documents must include security
+   analysis per [RFC3552].  This BCP defines the Internet threat model
+   (passive and active attacks, eavesdropping, replay, man-in-the-
+   middle, denial of service) and security goals (confidentiality,
+   integrity, authentication).  For agent-based systems, authors must
+   document:
+
+   *  Threat modeling for autonomous decision-making and agent authority
+
+   *  Authentication and authorization mechanisms for agent actions
+
+   *  Protection against malicious agents or compromised agent behavior
+
+   *  Which attacks are in-scope versus out-of-scope and why
+
+   *  Cryptographic protections and their limitations
+
+   The structured threat analysis helps agents reading specifications
+   identify security-critical code paths, understand attack surfaces,
+   and generate appropriate security controls during implementation.
+
+   *Privacy Considerations*: Agent systems often collect, process, or
+   transmit data about individuals through automated mechanisms.
+   [RFC6973] provides a questionnaire-based framework for analyzing
+   privacy implications across three mitigation areas:
+
+   *  Data minimization: identifiers, fingerprinting, correlation, and
+      retention
+
+   *  User participation: control, consent, and transparency mechanisms
+
+   *  Security: protection of personal data and privacy-relevant
+      information
+
+   Authors should evaluate whether agents create new privacy threats
+   through automated data collection, behavioral profiling, cross-
+   context correlation, or persistent tracking.  For agents implementing
+   protocols, these sections provide concrete guidance on:
+
+   *  Which data elements contain personal information
+
+   *  What identifiers can be correlated across protocol interactions
+
+   *  Required user consent mechanisms before data sharing
+
+   *  Data retention requirements and deletion policies
+
+   This structured privacy analysis enables implementing agents to
+   correctly handle sensitive data, implement required consent flows,
+   and avoid privacy-violating patterns.
+
+   *Operational Considerations*: Deploying and managing agent systems
+   presents unique operational challenges.  [RFC5706] guides authors to
+   address deployment aspects at the design phase rather than
+   retrofitting later:
+
+   *  Installation and initial setup procedures
+
+   *  Migration paths from existing systems
+
+   *  Fault detection, isolation, and root cause analysis
+
+   *  Configuration management and verification
+
+   *  Performance monitoring at protocol, device, network, and service
+      levels
+
+   *  Impact on network operations
+
+   For agents, additional considerations include agent lifecycle
+   management, coordination between multiple agents, and mechanisms for
+   human oversight or intervention.  When agents assist in
+   implementation, operational considerations sections provide:
+
+   *  Deployment prerequisites and dependencies
+
+   *  Configuration parameters and valid ranges
+
+   *  Monitoring and telemetry requirements
+
+   *  Error conditions and recovery procedures
+
+   *  Interoperability requirements with existing systems
+
+3.2.  Value to Agents Assisting Implementation
+
+   Agents reading internet drafts to assist developers benefit
+   significantly from well-structured consideration sections.  These
+   sections provide machine-parseable patterns for:
+
+   1.  *Security Requirements Translation*: Agents can extract threat
+       models and map them to specific code requirements (input
+       validation, authentication checks, cryptographic operations, rate
+       limiting).
+
+   2.  *Privacy-by-Design Implementation*: Privacy considerations
+       specify what data minimization techniques to apply, which
+       identifiers should be ephemeral, and what consent mechanisms to
+       implement before data collection.
+
+   3.  *Operational Instrumentation*: Operational considerations inform
+       agents which metrics to expose, what configuration options to
+       support, how to implement health checks, and what management
+       interfaces to provide.
+
+   4.  *Testing and Validation*: Consideration sections identify attack
+       scenarios to test against, privacy properties to verify, and
+       operational failure modes to handle.
+
+   5.  *Documentation Generation*: Agents can extract deployment
+       requirements, configuration guidance, and operational procedures
+       from consideration sections to generate implementation
+       documentation.
+
+3.3.  Guidance for Authors
+
+   Authors should assess which consideration sections are relevant to
+   their specification and provide substantive, specific analysis rather
+   than placeholder text.  When a consideration area is not applicable,
+   a brief explanation of why should be provided.  For specifications
+   involving agents or autonomous systems, authors should explicitly
+   address:
+
+   *  How agent autonomy affects traditional security models
+
+   *  What privacy implications arise from automated data processing
+
+   *  How agent behavior can be monitored, configured, and controlled
+      operationally
+
+   The goal is to ensure that both human implementers and agents
+   assisting with implementation have sufficient information to build
+   secure, privacy-respecting, and operationally manageable systems.
+
+4.  Security Considerations
 
    TODO Security
 
-4.  IANA Considerations
+5.  IANA Considerations
 
    This document has no IANA actions.
 
-5.  Normative References
+6.  References
+
+6.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -103,12 +262,30 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+6.2.  Informative References
+
+   [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
+              Text on Security Considerations", BCP 72, RFC 3552,
+              DOI 10.17487/RFC3552, July 2003,
+              <https://www.rfc-editor.org/rfc/rfc3552>.
+
+   [RFC5706]  Harrington, D., "Guidelines for Considering Operations and
+              Management of New Protocols and Protocol Extensions",
+              RFC 5706, DOI 10.17487/RFC5706, November 2009,
+              <https://www.rfc-editor.org/rfc/rfc5706>.
+
+   [RFC6973]  Cooper, A., Tschofenig, H., Aboba, B., Peterson, J.,
+              Morris, J., Hansen, M., and R. Smith, "Privacy
+              Considerations for Internet Protocols", RFC 6973,
+              DOI 10.17487/RFC6973, July 2013,
+              <https://www.rfc-editor.org/rfc/rfc6973>.
+
 Acknowledgments
 
    TODO acknowledge.
 
 Author's Address
 
-   Your Name Here
-   Your Organization Here
-   Email: your.email@example.com
+   Orie Steele
+   Tradeverifyd
+   Email: orie@or13.io
