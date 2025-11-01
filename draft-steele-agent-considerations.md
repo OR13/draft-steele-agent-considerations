@@ -30,7 +30,7 @@ author:
  -
     fullname: "Henk Birkholz"
     organization: Fraunhofer SIT
-    email: "henk.birkholz@ietf.contact
+    email: "henk.birkholz@ietf.contact"
 
 normative:
 
