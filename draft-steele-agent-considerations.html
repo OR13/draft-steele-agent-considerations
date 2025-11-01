@@ -6,8 +6,12 @@
 <meta content="initial-scale=1.0" name="viewport">
 <title>Agent Considerations</title>
 <meta content="Orie Steele" name="author">
+<meta content="Henk Birkholz" name="author">
 <meta content="
-       TODO Abstract 
+       IETF specifications provide the basis for technical implementation in several programming languages.
+An IETF specification that provides appropriate guidance to artificial intelligence (AI) agents, can enable such agents to consume specifiction and generate code from it.
+This documents defines the use of an Agent Consideration section that is in support of code generation including the use of agentcards, guidance on authorship, examples and their annotation for code generation, as well as language specific guidance for the production of media-types.
+The Agent Consideration defined in this document can be added to any Internet-Draft that includes normative language and sufficiant expressive examples derived from an included data model and protocol interaction defintions. 
     " name="description">
 <meta content="xml2rfc 3.31.0" name="generator">
 <meta content="agent" name="keyword">
@@ -1047,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <td class="right">November 2025</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Steele</td>
+<td class="left">Steele &amp; Birkholz</td>
 <td class="center">Expires 5 May 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
@@ -1067,11 +1071,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
 <dd class="expires"><time datetime="2026-05-05">5 May 2026</time></dd>
-<dt class="label-authors">Author:</dt>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">O. Steele</div>
 <div class="org">Tradeverifyd</div>
+</div>
+<div class="author">
+      <div class="author-name">H. Birkholz</div>
+<div class="org">Fraunhofer SIT</div>
 </div>
 </dd>
 </dl>
@@ -1079,7 +1087,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Agent Considerations</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">TODO Abstract<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">IETF specifications provide the basis for technical implementation in several programming languages.
+An IETF specification that provides appropriate guidance to artificial intelligence (AI) agents, can enable such agents to consume specifiction and generate code from it.
+This documents defines the use of an Agent Consideration section that is in support of code generation including the use of agentcards, guidance on authorship, examples and their annotation for code generation, as well as language specific guidance for the production of media-types.
+The Agent Consideration defined in this document can be added to any Internet-Draft that includes normative language and sufficiant expressive examples derived from an included data model and protocol interaction defintions.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1164,27 +1175,109 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-model-context-protocol-supp" class="internal xref">Model Context Protocol Support</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-mcp-resources-for-internet-" class="internal xref">MCP Resources for Internet Drafts</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-mcp-prompts-for-specificati" class="internal xref">MCP Prompts for Specifications</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-mcp-tools-for-specification" class="internal xref">MCP Tools for Specifications</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-media-type-specific-guidanc" class="internal xref">Media Type Specific Guidance</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
+                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-protocol-format-specific-gu" class="internal xref">Protocol Format Specific Guidance</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.6">
+                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="auto internal xref">4.6</a>.  <a href="#name-recommendations-for-authors" class="internal xref">Recommendations for Authors</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-agent2agent-protocol-suppor" class="internal xref">Agent2Agent Protocol Support</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-a2a-agent-cards-for-specifi" class="internal xref">A2A Agent Cards for Specifications</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-a2a-skills-for-specificatio" class="internal xref">A2A Skills for Specification Operations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-a2a-messages-parts-and-arti" class="internal xref">A2A Messages, Parts, and Artifacts</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-a2a-tasks-for-protocol-oper" class="internal xref">A2A Tasks for Protocol Operations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
+                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-media-type-specific-guidance" class="internal xref">Media Type Specific Guidance for A2A</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
+                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.  <a href="#name-protocol-format-specific-gui" class="internal xref">Protocol Format Specific Guidance for A2A</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.7">
+                <p id="section-toc.1-1.5.2.7.1"><a href="#section-5.7" class="auto internal xref">5.7</a>.  <a href="#name-streaming-and-asynchronous-" class="internal xref">Streaming and Asynchronous Protocol Operations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.8">
+                <p id="section-toc.1-1.5.2.8.1"><a href="#section-5.8" class="auto internal xref">5.8</a>.  <a href="#name-recommendations-for-authors-2" class="internal xref">Recommendations for Authors</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-prompt-injection" class="internal xref">Prompt Injection</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.1">
+                    <p id="section-toc.1-1.6.2.1.2.1.1"><a href="#section-6.1.1" class="auto internal xref">6.1.1</a>.  <a href="#name-types-of-prompt-injection-a" class="internal xref">Types of Prompt Injection Attacks</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.2">
+                    <p id="section-toc.1-1.6.2.1.2.2.1"><a href="#section-6.1.2" class="auto internal xref">6.1.2</a>.  <a href="#name-mitigation-strategies" class="internal xref">Mitigation Strategies</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1.2.3">
+                    <p id="section-toc.1-1.6.2.1.2.3.1"><a href="#section-6.1.3" class="auto internal xref">6.1.3</a>.  <a href="#name-recommendations-for-authors-" class="internal xref">Recommendations for Authors and Implementers</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-improper-validation-of-gene" class="internal xref">Improper Validation of Generative AI Output</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-security-implications" class="internal xref">Security Implications</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="auto internal xref">6.2.2</a>.  <a href="#name-mitigation-strategies-2" class="internal xref">Mitigation Strategies</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.3">
+                    <p id="section-toc.1-1.6.2.2.2.3.1"><a href="#section-6.2.3" class="auto internal xref">6.2.3</a>.  <a href="#name-recommendations-for-authors-a" class="internal xref">Recommendations for Authors and Implementers</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1195,7 +1288,28 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">TODO Introduction<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">IETF specifications serve as foundational documents for technical implementation across multiple programming languages and platforms. These specifications define protocols, data formats, and system behaviors that developers implement to enable interoperability and standardization across the Internet.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">In recent years, artificial intelligence (AI) agents have emerged as powerful tools for assisting developers in understanding and implementing IETF specifications. These agents can analyze specification text, extract normative requirements, understand protocol interactions, and generate code that conforms to the defined standards. However, for agents to effectively consume specifications and produce high-quality implementations, they require structured, machine-parseable guidance that goes beyond human-readable prose.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">This document defines the use of an "Agent Consideration" section within IETF specifications. An Agent Consideration section provides structured guidance specifically designed to support automated code generation by AI agents. This guidance includes:<a href="#section-1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1-4.1">
+          <p id="section-1-4.1.1">Agentcards: Structured metadata and annotations that help agents understand specification structure and requirements<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.2">
+          <p id="section-1-4.2.1">Authorship guidance: Clear delineation of normative requirements, examples, and implementation guidance<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.3">
+          <p id="section-1-4.3.1">Example annotation: Marked examples with clear indications of their purpose, correctness, and usage in code generation<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.4">
+          <p id="section-1-4.4.1">Language-specific guidance: Directives for generating implementations in specific programming languages<a href="#section-1-4.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-4.5">
+          <p id="section-1-4.5.1">Media-type production guidance: Specifications for generating code that correctly handles content types<a href="#section-1-4.5.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-1-5">The Agent Consideration section defined in this document can be added to any Internet-Draft that includes normative language and sufficient expressive examples derived from included data models and protocol interaction definitions. By providing this structured guidance, specification authors can enable more accurate and efficient code generation while maintaining the human readability and clarity that IETF documents are known for.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">This document builds upon established IETF practices for consideration sections (security, privacy, and operational considerations) by adding a new consideration type focused on enabling automated implementation assistance. Just as security considerations help implementers understand threats and protections, Agent Considerations help implementing agents understand how to correctly translate specification text into executable code.<a href="#section-1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1365,31 +1479,885 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </div>
 </section>
 </div>
-<div id="security-considerations">
+<div id="model-context-protocol-support">
 <section id="section-4">
-      <h2 id="name-security-considerations">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-model-context-protocol-supp">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-model-context-protocol-supp" class="section-name selfRef">Model Context Protocol Support</a>
       </h2>
-<p id="section-4-1">TODO Security<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The Model Context Protocol (MCP) <span>[<a href="#MCP" class="cite xref">MCP</a>]</span> is an open protocol that enables seamless integration between LLM applications and external data sources and tools. MCP standardizes how AI agents connect with external resources through three primary server capabilities: resources (context and data), prompts (templated workflows), and tools (executable functions).<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">For authors of internet drafts, MCP provides a framework for identifying what specification artifacts should be exposed to agents. This section guides authors in determining which resources, prompts, and tools are relevant to their specification, with particular focus on media types and protocol formats.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<div id="mcp-resources-for-internet-drafts">
+<section id="section-4.1">
+        <h3 id="name-mcp-resources-for-internet-">
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-mcp-resources-for-internet-" class="section-name selfRef">MCP Resources for Internet Drafts</a>
+        </h3>
+<p id="section-4.1-1">MCP resources represent context and data that agents can query. Authors should identify which specification artifacts are valuable as discrete resources:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2"><strong>Media Type Definitions</strong>: When a specification defines one or more media types (e.g., <code>application/example+json</code>, <code>application/example+cbor</code>):<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-3.1">
+            <p id="section-4.1-3.1.1">Each media type definition should be exposed as a resource containing the complete definition, parameters, and processing requirements<a href="#section-4.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-3.2">
+            <p id="section-4.1-3.2.1">Include references to the formal schema or grammar for the media type<a href="#section-4.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-3.3">
+            <p id="section-4.1-3.3.1">Provide examples in the media type format<a href="#section-4.1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-4"><strong>Protocol Format Specifications</strong>: For specifications defining protocol message formats:<a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-5.1">
+            <p id="section-4.1-5.1.1">Wire format definitions (binary layouts, encoding rules)<a href="#section-4.1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-5.2">
+            <p id="section-4.1-5.2.1">Message structure specifications (headers, payloads, trailers)<a href="#section-4.1-5.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-5.3">
+            <p id="section-4.1-5.3.1">Serialization rules and constraints<a href="#section-4.1-5.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-5.4">
+            <p id="section-4.1-5.4.1">ABNF grammars, CDDL schemas, JSON Schema, or other formal notations<a href="#section-4.1-5.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-6"><strong>Data Models</strong>: Structured data model definitions:<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-7.1">
+            <p id="section-4.1-7.1.1">Complete schema definitions (JSON Schema, CDDL, XML Schema, etc.)<a href="#section-4.1-7.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-7.2">
+            <p id="section-4.1-7.2.1">Type definitions and constraints<a href="#section-4.1-7.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-7.3">
+            <p id="section-4.1-7.3.1">Enumeration values and their semantics<a href="#section-4.1-7.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-7.4">
+            <p id="section-4.1-7.4.1">Relationship specifications between data elements<a href="#section-4.1-7.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-8"><strong>Format Examples</strong>: Example messages, documents, or data structures:<a href="#section-4.1-8" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-9.1">
+            <p id="section-4.1-9.1.1">Valid examples demonstrating correct format usage<a href="#section-4.1-9.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-9.2">
+            <p id="section-4.1-9.2.1">Invalid examples demonstrating common errors<a href="#section-4.1-9.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-9.3">
+            <p id="section-4.1-9.3.1">Edge cases and boundary conditions<a href="#section-4.1-9.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-9.4">
+            <p id="section-4.1-9.4.1">Format variations (different encodings of the same logical content)<a href="#section-4.1-9.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="mcp-prompts-for-specifications">
+<section id="section-4.2">
+        <h3 id="name-mcp-prompts-for-specificati">
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-mcp-prompts-for-specificati" class="section-name selfRef">MCP Prompts for Specifications</a>
+        </h3>
+<p id="section-4.2-1">MCP prompts are templated workflows that guide agent interaction with specifications. Authors should consider which prompts would be valuable:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2"><strong>Media Type Implementation Prompt</strong>: A prompt template for generating media type handlers:<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.2-3">
+<pre>
+Generate [language] code to parse and serialize [media-type-name].
+The implementation must conform to the format specification in [resource-ref].
+Include validation according to [schema-resource-ref].
+Generate test cases using examples from [examples-resource-ref].
+</pre><a href="#section-4.2-3" class="pilcrow">¶</a>
+</div>
+<p id="section-4.2-4"><strong>Protocol Format Parser Prompt</strong>: A prompt template for generating protocol parsers:<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.2-5">
+<pre>
+Generate a [language] parser for [protocol-name] messages.
+Follow the wire format defined in [format-resource-ref].
+Implement validation rules from [validation-resource-ref].
+Handle error conditions specified in [errors-resource-ref].
+</pre><a href="#section-4.2-5" class="pilcrow">¶</a>
+</div>
+<p id="section-4.2-6"><strong>Format Validator Prompt</strong>: A prompt template for generating validators:<a href="#section-4.2-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.2-7">
+<pre>
+Generate a validator for [format-name] that checks:
+- Schema conformance per [schema-resource-ref]
+- Semantic constraints from [constraints-resource-ref]
+- Security requirements from [security-resource-ref]
+</pre><a href="#section-4.2-7" class="pilcrow">¶</a>
+</div>
+<p id="section-4.2-8"><strong>Serialization Prompt</strong>: A prompt template for format conversion:<a href="#section-4.2-8" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.2-9">
+<pre>
+Generate code to convert between [format-a] and [format-b].
+Preserve semantics defined in [semantics-resource-ref].
+Handle format-specific features per [features-resource-ref].
+</pre><a href="#section-4.2-9" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="mcp-tools-for-specifications">
+<section id="section-4.3">
+        <h3 id="name-mcp-tools-for-specification">
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-mcp-tools-for-specification" class="section-name selfRef">MCP Tools for Specifications</a>
+        </h3>
+<p id="section-4.3-1">MCP tools are executable functions that servers expose. Authors should document which tools are relevant:<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2"><strong>Format Validators</strong>: Tools that validate instances against specification requirements:<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-3.1">
+            <p id="section-4.3-3.1.1">Media type validators that check conformance to media type definitions<a href="#section-4.3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-3.2">
+            <p id="section-4.3-3.2.1">Schema validators that verify data against formal schemas<a href="#section-4.3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-3.3">
+            <p id="section-4.3-3.3.1">Protocol validators that check message format compliance<a href="#section-4.3-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-4"><strong>Format Converters</strong>: Tools that transform between formats:<a href="#section-4.3-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-5.1">
+            <p id="section-4.3-5.1.1">Conversion between different encodings (JSON ↔ CBOR, XML ↔ JSON)<a href="#section-4.3-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-5.2">
+            <p id="section-4.3-5.2.1">Transformation between versions of a format<a href="#section-4.3-5.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-5.3">
+            <p id="section-4.3-5.3.1">Canonical form generators<a href="#section-4.3-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-6"><strong>Example Generators</strong>: Tools that produce valid instances:<a href="#section-4.3-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-7.1">
+            <p id="section-4.3-7.1.1">Random valid message generators for testing<a href="#section-4.3-7.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-7.2">
+            <p id="section-4.3-7.2.1">Example generators based on schema definitions<a href="#section-4.3-7.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-7.3">
+            <p id="section-4.3-7.3.1">Test vector generators for interoperability testing<a href="#section-4.3-7.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-8"><strong>Parsers and Serializers</strong>: Reference implementations as tools:<a href="#section-4.3-8" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-9.1">
+            <p id="section-4.3-9.1.1">Parsers that accept format instances and produce structured data<a href="#section-4.3-9.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-9.2">
+            <p id="section-4.3-9.2.1">Serializers that accept structured data and produce format instances<a href="#section-4.3-9.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-9.3">
+            <p id="section-4.3-9.3.1">Round-trip verification tools<a href="#section-4.3-9.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="media-type-specific-guidance">
+<section id="section-4.4">
+        <h3 id="name-media-type-specific-guidanc">
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-media-type-specific-guidanc" class="section-name selfRef">Media Type Specific Guidance</a>
+        </h3>
+<p id="section-4.4-1">When specifications define media types, authors should ensure MCP resources include:<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-2"><strong>Media Type Registration Information</strong>:
+- Type name (e.g., <code>application/example+json</code>)
+- Required parameters and optional parameters
+- Encoding considerations
+- Security considerations specific to the media type
+- Interoperability considerations
+- Fragment identifier syntax (if applicable)<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<p id="section-4.4-3"><strong>Format Schema</strong>:
+- Complete formal schema in appropriate notation (JSON Schema for +json types, CDDL for +cbor types)
+- Schema versioning information
+- Extension points and their usage<a href="#section-4.4-3" class="pilcrow">¶</a></p>
+<p id="section-4.4-4"><strong>Processing Model</strong>:
+- How recipients should process instances of the media type
+- Required processing steps
+- Optional processing capabilities
+- Error handling requirements<a href="#section-4.4-4" class="pilcrow">¶</a></p>
+<p id="section-4.4-5"><strong>Content Negotiation Guidance</strong>:
+- How the media type participates in content negotiation
+- Relationship to other media types
+- Quality parameters and their interpretation<a href="#section-4.4-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="protocol-format-specific-guidance">
+<section id="section-4.5">
+        <h3 id="name-protocol-format-specific-gu">
+<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-protocol-format-specific-gu" class="section-name selfRef">Protocol Format Specific Guidance</a>
+        </h3>
+<p id="section-4.5-1">For specifications defining protocol formats, authors should ensure MCP resources include:<a href="#section-4.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.5-2"><strong>Wire Format Definitions</strong>:
+- Binary layout specifications with byte ordering
+- Field definitions with types, sizes, and offsets
+- Encoding rules (fixed-width, variable-length, compressed, etc.)
+- Alignment and padding requirements<a href="#section-4.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.5-3"><strong>Message Structure</strong>:
+- Message types and their numeric identifiers
+- Header formats and required fields
+- Payload structure and content rules
+- Trailer or footer formats
+- Message framing and delimitation<a href="#section-4.5-3" class="pilcrow">¶</a></p>
+<p id="section-4.5-4"><strong>State Machine Specifications</strong>:
+- Protocol states and transitions
+- Message exchange patterns
+- Valid message sequences
+- Error states and recovery procedures<a href="#section-4.5-4" class="pilcrow">¶</a></p>
+<p id="section-4.5-5"><strong>Extension Mechanisms</strong>:
+- How the protocol supports extensions
+- Extension registration requirements
+- Parsing rules for unknown extensions
+- Versioning and compatibility rules<a href="#section-4.5-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="recommendations-for-authors">
+<section id="section-4.6">
+        <h3 id="name-recommendations-for-authors">
+<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-recommendations-for-authors" class="section-name selfRef">Recommendations for Authors</a>
+        </h3>
+<p id="section-4.6-1">To enable effective MCP-based agent interaction with specifications:<a href="#section-4.6-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-4.6-2">
+<li id="section-4.6-2.1">
+            <p id="section-4.6-2.1.1"><strong>Explicitly list MCP resources</strong>: In the Agent Considerations section, enumerate which specification artifacts should be exposed as MCP resources.<a href="#section-4.6-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-4.6-2.2">
+            <p id="section-4.6-2.2.1"><strong>Provide prompt templates</strong>: Include example prompts that agents can use to generate implementations of media types or protocol formats defined in the specification.<a href="#section-4.6-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-4.6-2.3">
+            <p id="section-4.6-2.3.1"><strong>Document validation tools</strong>: Specify what validation tools should exist and what properties they must check.<a href="#section-4.6-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-4.6-2.4">
+            <p id="section-4.6-2.4.1"><strong>Reference formal schemas</strong>: Ensure all media types and protocol formats have machine-readable formal definitions that can be exposed as MCP resources.<a href="#section-4.6-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-4.6-2.5">
+            <p id="section-4.6-2.5.1"><strong>Include test vectors</strong>: Provide comprehensive examples that can be used by MCP tools for validation and testing.<a href="#section-4.6-2.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<p id="section-4.6-3">By identifying relevant MCP resources, prompts, and tools for their specifications, authors enable agents to provide more effective implementation assistance for media types and protocol formats.<a href="#section-4.6-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="agent2agent-protocol-support">
+<section id="section-5">
+      <h2 id="name-agent2agent-protocol-suppor">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-agent2agent-protocol-suppor" class="section-name selfRef">Agent2Agent Protocol Support</a>
+      </h2>
+<p id="section-5-1">The Agent2Agent Protocol (A2A) <span>[<a href="#A2A" class="cite xref">A2A</a>]</span> is an open standard enabling communication between independent AI agent systems. A2A facilitates agent-to-agent communication through capability discovery, task delegation, and collaborative work on complex requests. Unlike MCP which focuses on LLM application integration with data sources, A2A targets inter-agent communication in distributed agentic ecosystems.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">For authors of internet drafts, A2A provides a framework for exposing specification capabilities as discoverable agent skills. This section guides authors in determining how media types, protocol formats, and operations defined in their specifications should be exposed through A2A Agent Cards, skills, and task interfaces.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<div id="a2a-agent-cards-for-specifications">
+<section id="section-5.1">
+        <h3 id="name-a2a-agent-cards-for-specifi">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-a2a-agent-cards-for-specifi" class="section-name selfRef">A2A Agent Cards for Specifications</a>
+        </h3>
+<p id="section-5.1-1">An Agent Card is a JSON manifest describing an agent's identity, capabilities, authentication requirements, and supported operations. When a specification defines media types or protocol operations, authors should consider what would appear in an Agent Card for an agent implementing that specification:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2"><strong>Media Type Support</strong>: Agent Cards declare supported content types through input and output modes:<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-3.1">
+            <p id="section-5.1-3.1.1"><code>defaultInputModes</code>: MIME types the agent accepts (e.g., <code>["application/example+json", "application/example+cbor"]</code>)<a href="#section-5.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-3.2">
+            <p id="section-5.1-3.2.1"><code>defaultOutputModes</code>: MIME types the agent produces<a href="#section-5.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-3.3">
+            <p id="section-5.1-3.3.1">Per-skill mode overrides for operations with specific format requirements<a href="#section-5.1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.1-4"><strong>Transport Protocols</strong>: Agent Cards specify available transports:<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-5.1">
+            <p id="section-5.1-5.1.1"><code>preferredTransport</code>: Primary protocol binding (JSON-RPC, gRPC, or HTTP+JSON)<a href="#section-5.1-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-5.2">
+            <p id="section-5.1-5.2.1"><code>additionalInterfaces</code>: Alternative transport endpoints<a href="#section-5.1-5.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-5.3">
+            <p id="section-5.1-5.3.1"><code>url</code>: Primary endpoint for accessing the agent<a href="#section-5.1-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.1-6"><strong>Authentication Requirements</strong>: Agent Cards declare security schemes:<a href="#section-5.1-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-7.1">
+            <p id="section-5.1-7.1.1"><code>securitySchemes</code>: Authentication methods (Bearer tokens, API keys, OAuth2)<a href="#section-5.1-7.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-7.2">
+            <p id="section-5.1-7.2.1"><code>security</code>: Required authentication for agent access<a href="#section-5.1-7.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-7.3">
+            <p id="section-5.1-7.3.1">Skill-level security requirements for operation-specific authorization<a href="#section-5.1-7.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.1-8"><strong>Protocol Capabilities</strong>: Agent Cards indicate protocol features:<a href="#section-5.1-8" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.1-9.1">
+            <p id="section-5.1-9.1.1">Streaming support for incremental results<a href="#section-5.1-9.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-9.2">
+            <p id="section-5.1-9.2.1">Push notification capability for asynchronous operations<a href="#section-5.1-9.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.1-9.3">
+            <p id="section-5.1-9.3.1">State transition history support for auditability<a href="#section-5.1-9.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="a2a-skills-for-specification-operations">
+<section id="section-5.2">
+        <h3 id="name-a2a-skills-for-specificatio">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-a2a-skills-for-specificatio" class="section-name selfRef">A2A Skills for Specification Operations</a>
+        </h3>
+<p id="section-5.2-1">Skills represent distinct agent capabilities corresponding to operations defined in specifications. Authors should identify which specification operations map to A2A skills:<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2"><strong>Protocol Operation Skills</strong>: Each protocol operation becomes a skill:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-3.1">
+            <p id="section-5.2-3.1.1"><strong>Identification</strong>: Unique skill ID (e.g., <code>validate-credential</code>, <code>issue-token</code>)<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-3.2">
+            <p id="section-5.2-3.2.1"><strong>Description</strong>: Clear explanation of what the operation does<a href="#section-5.2-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-3.3">
+            <p id="section-5.2-3.3.1"><strong>Examples</strong>: Sample requests showing how to invoke the operation<a href="#section-5.2-3.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-3.4">
+            <p id="section-5.2-3.4.1"><strong>Input/Output Modes</strong>: Media types consumed and produced by the operation<a href="#section-5.2-3.4.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.2-4"><strong>Format Transformation Skills</strong>: Skills for converting between formats:<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-5.1">
+            <p id="section-5.2-5.1.1">Skills for encoding transformations (JSON to CBOR, canonical form generation)<a href="#section-5.2-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-5.2">
+            <p id="section-5.2-5.2.1">Skills for version migration (v1 format to v2 format)<a href="#section-5.2-5.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-5.3">
+            <p id="section-5.2-5.3.1">Skills for format validation and verification<a href="#section-5.2-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.2-6"><strong>Validation Skills</strong>: Skills for checking conformance:<a href="#section-5.2-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-7.1">
+            <p id="section-5.2-7.1.1">Schema validation skills that verify instances against formal definitions<a href="#section-5.2-7.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-7.2">
+            <p id="section-5.2-7.2.1">Protocol compliance skills that check message format correctness<a href="#section-5.2-7.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-7.3">
+            <p id="section-5.2-7.3.1">Semantic validation skills that enforce business rules<a href="#section-5.2-7.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.2-8"><strong>Query and Retrieval Skills</strong>: Skills for accessing specification artifacts:<a href="#section-5.2-8" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-9.1">
+            <p id="section-5.2-9.1.1">Skills to retrieve schema definitions<a href="#section-5.2-9.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-9.2">
+            <p id="section-5.2-9.2.1">Skills to fetch example instances<a href="#section-5.2-9.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-9.3">
+            <p id="section-5.2-9.3.1">Skills to query specification metadata<a href="#section-5.2-9.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="a2a-messages-parts-and-artifacts">
+<section id="section-5.3">
+        <h3 id="name-a2a-messages-parts-and-arti">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-a2a-messages-parts-and-arti" class="section-name selfRef">A2A Messages, Parts, and Artifacts</a>
+        </h3>
+<p id="section-5.3-1">A2A structures communication through messages containing parts, with outputs delivered as artifacts. Authors should consider how specification data maps to these structures:<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2"><strong>Message Structure</strong>: Messages have a role (<code>user</code> or <code>agent</code>) and contain parts:<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.3-3.1">
+            <p id="section-5.3-3.1.1">User messages containing protocol requests<a href="#section-5.3-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.3-3.2">
+            <p id="section-5.3-3.2.1">Agent messages containing protocol responses<a href="#section-5.3-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.3-3.3">
+            <p id="section-5.3-3.3.1">Multi-turn conversations for stateful protocol interactions<a href="#section-5.3-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.3-4"><strong>Part Types for Specification Data</strong>:<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+<p id="section-5.3-5"><strong>TextPart</strong>: Plain text content appropriate for:
+- Human-readable explanations
+- Log messages and diagnostic output
+- Textual protocol representations<a href="#section-5.3-5" class="pilcrow">¶</a></p>
+<p id="section-5.3-6"><strong>FilePart</strong>: File content with MIME type, suitable for:
+- Media type instances as files
+- Large protocol messages
+- Binary format examples
+- References via URI or embedded bytes<a href="#section-5.3-6" class="pilcrow">¶</a></p>
+<p id="section-5.3-7"><strong>DataPart</strong>: Structured JSON data, ideal for:
+- Protocol parameters and configuration
+- Structured validation results
+- Metadata about media types or formats
+- API request/response payloads<a href="#section-5.3-7" class="pilcrow">¶</a></p>
+<p id="section-5.3-8"><strong>Artifacts for Protocol Outputs</strong>: Artifacts contain generated outputs:
+- Valid instances of media types produced by generation skills
+- Validation reports from conformance checking skills
+- Transformed data from format conversion skills
+- Test vectors for interoperability verification<a href="#section-5.3-8" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="a2a-tasks-for-protocol-operations">
+<section id="section-5.4">
+        <h3 id="name-a2a-tasks-for-protocol-oper">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-a2a-tasks-for-protocol-oper" class="section-name selfRef">A2A Tasks for Protocol Operations</a>
+        </h3>
+<p id="section-5.4-1">Tasks represent work units with defined lifecycle states. Protocol operations exposed through A2A become tasks with specific characteristics:<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2"><strong>Task States for Protocol Operations</strong>:<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.4-3.1">
+            <p id="section-5.4-3.1.1"><code>queued</code>: Operation accepted but not yet started<a href="#section-5.4-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.4-3.2">
+            <p id="section-5.4-3.2.1"><code>in-progress</code>: Protocol operation executing<a href="#section-5.4-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.4-3.3">
+            <p id="section-5.4-3.3.1"><code>auth-required</code>: Operation needs additional authorization<a href="#section-5.4-3.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.4-3.4">
+            <p id="section-5.4-3.4.1"><code>input-required</code>: Operation needs more parameters<a href="#section-5.4-3.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.4-3.5">
+            <p id="section-5.4-3.5.1"><code>completed</code>: Protocol operation succeeded, artifacts contain results<a href="#section-5.4-3.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.4-3.6">
+            <p id="section-5.4-3.6.1"><code>rejected</code>: Operation request invalid or malformed<a href="#section-5.4-3.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.4-3.7">
+            <p id="section-5.4-3.7.1"><code>failed</code>: Protocol operation encountered error<a href="#section-5.4-3.7.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.4-3.8">
+            <p id="section-5.4-3.8.1"><code>canceled</code>: Operation terminated by client request<a href="#section-5.4-3.8.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.4-4"><strong>Task History</strong>: Protocol interactions recorded as message turns:
+- Initial request with operation parameters
+- Intermediate status updates for long-running operations
+- Final response with operation results<a href="#section-5.4-4" class="pilcrow">¶</a></p>
+<p id="section-5.4-5"><strong>Task Context</strong>: Related protocol operations grouped by context identifier:
+- Multiple operations in a protocol session share context
+- Stateful protocols maintain context across task sequences<a href="#section-5.4-5" class="pilcrow">¶</a></p>
+<p id="section-5.4-6"><strong>Asynchronous Operations</strong>: Long-running protocol operations use push notifications:
+- Client registers webhook for status updates
+- Agent sends notifications as operation progresses
+- Client retrieves final artifacts when task completes<a href="#section-5.4-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="media-type-specific-guidance-for-a2a">
+<section id="section-5.5">
+        <h3 id="name-media-type-specific-guidance">
+<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-media-type-specific-guidance" class="section-name selfRef">Media Type Specific Guidance for A2A</a>
+        </h3>
+<p id="section-5.5-1">When specifications define media types, authors should document how they appear in A2A interfaces:<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.5-2"><strong>Agent Card Media Type Declaration</strong>:<a href="#section-5.5-2" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.5-3">
+<pre>
+{
+  "defaultInputModes": ["application/example+json"],
+  "defaultOutputModes": ["application/example+json"],
+  "skills": [
+    {
+      "id": "parse-example",
+      "name": "Parse Example Format",
+      "description": "Parse and validate application/example+json instances",
+      "inputModes": ["application/example+json"],
+      "outputModes": ["application/json"]
+    }
+  ]
+}
+</pre><a href="#section-5.5-3" class="pilcrow">¶</a>
+</div>
+<p id="section-5.5-4"><strong>Media Type Processing Skills</strong>: Define skills for each media type operation:<a href="#section-5.5-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.5-5.1">
+            <p id="section-5.5-5.1.1">Parsing skills that accept media type instances as FilePart inputs<a href="#section-5.5-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.5-5.2">
+            <p id="section-5.5-5.2.1">Serialization skills that produce media type instances as FilePart outputs<a href="#section-5.5-5.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.5-5.3">
+            <p id="section-5.5-5.3.1">Validation skills that check media type conformance<a href="#section-5.5-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.5-6"><strong>Media Type Parameters</strong>: Handle media type parameters through DataPart:<a href="#section-5.5-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.5-7.1">
+            <p id="section-5.5-7.1.1">Parameters passed as structured JSON in DataPart<a href="#section-5.5-7.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.5-7.2">
+            <p id="section-5.5-7.2.1">Validation results returned as DataPart with structured diagnostics<a href="#section-5.5-7.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.5-7.3">
+            <p id="section-5.5-7.3.1">Configuration options specified via DataPart<a href="#section-5.5-7.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.5-8"><strong>Content Negotiation</strong>: Specify multiple output modes in skills:<a href="#section-5.5-8" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.5-9.1">
+            <p id="section-5.5-9.1.1">List all supported encoding variants in <code>outputModes</code><a href="#section-5.5-9.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.5-9.2">
+            <p id="section-5.5-9.2.1">Client requests preferred format through task parameters<a href="#section-5.5-9.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.5-9.3">
+            <p id="section-5.5-9.3.1">Agent returns content in negotiated format<a href="#section-5.5-9.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="protocol-format-specific-guidance-for-a2a">
+<section id="section-5.6">
+        <h3 id="name-protocol-format-specific-gui">
+<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-protocol-format-specific-gui" class="section-name selfRef">Protocol Format Specific Guidance for A2A</a>
+        </h3>
+<p id="section-5.6-1">For specifications defining protocol formats, authors should document A2A exposure:<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+<p id="section-5.6-2"><strong>Protocol Message Skills</strong>: Define skills for protocol operations:<a href="#section-5.6-2" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.6-3">
+<pre>
+{
+  "id": "protocol-request",
+  "name": "Process Protocol Request",
+  "description": "Handle protocol request message per RFC XXXX",
+  "inputModes": ["application/protocol+cbor"],
+  "outputModes": ["application/protocol+cbor"],
+  "examples": [
+    "Process authentication request",
+    "Handle data query message"
+  ]
+}
+</pre><a href="#section-5.6-3" class="pilcrow">¶</a>
+</div>
+<p id="section-5.6-4"><strong>Wire Format Handling</strong>: Protocol formats map to A2A parts:<a href="#section-5.6-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.6-5.1">
+            <p id="section-5.6-5.1.1">Binary protocol messages as FilePart with appropriate MIME type<a href="#section-5.6-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.6-5.2">
+            <p id="section-5.6-5.2.1">Protocol parameters as DataPart with structured JSON<a href="#section-5.6-5.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.6-5.3">
+            <p id="section-5.6-5.3.1">Protocol responses as artifacts containing FilePart outputs<a href="#section-5.6-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.6-6"><strong>State Machine Operations</strong>: Protocol states map to task states:<a href="#section-5.6-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.6-7.1">
+            <p id="section-5.6-7.1.1">Protocol session establishment creates task with context<a href="#section-5.6-7.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.6-7.2">
+            <p id="section-5.6-7.2.1">Protocol state transitions reflected in task status updates<a href="#section-5.6-7.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.6-7.3">
+            <p id="section-5.6-7.3.1">Protocol session termination completes or cancels task<a href="#section-5.6-7.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.6-8"><strong>Multi-Message Protocols</strong>: Conversational protocols use task history:<a href="#section-5.6-8" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.6-9.1">
+            <p id="section-5.6-9.1.1">Each protocol message becomes a message turn in task history<a href="#section-5.6-9.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.6-9.2">
+            <p id="section-5.6-9.2.1">Client and agent roles map to protocol participants<a href="#section-5.6-9.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.6-9.3">
+            <p id="section-5.6-9.3.1">Context groups related protocol message exchanges<a href="#section-5.6-9.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.6-10"><strong>Transport Binding</strong>: Protocol formats support multiple A2A transports:<a href="#section-5.6-10" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.6-11.1">
+            <p id="section-5.6-11.1.1">JSON-RPC for protocols with RPC-like semantics<a href="#section-5.6-11.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.6-11.2">
+            <p id="section-5.6-11.2.1">gRPC for protocols requiring high performance<a href="#section-5.6-11.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.6-11.3">
+            <p id="section-5.6-11.3.1">HTTP+JSON for protocols with RESTful patterns<a href="#section-5.6-11.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="streaming-and-asynchronous-protocol-operations">
+<section id="section-5.7">
+        <h3 id="name-streaming-and-asynchronous-">
+<a href="#section-5.7" class="section-number selfRef">5.7. </a><a href="#name-streaming-and-asynchronous-" class="section-name selfRef">Streaming and Asynchronous Protocol Operations</a>
+        </h3>
+<p id="section-5.7-1">A2A provides streaming and push notification capabilities for protocol operations:<a href="#section-5.7-1" class="pilcrow">¶</a></p>
+<p id="section-5.7-2"><strong>Streaming Protocol Responses</strong>: Use <code>message/stream</code> for incremental output:<a href="#section-5.7-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.7-3.1">
+            <p id="section-5.7-3.1.1">Protocol operations producing progressive results stream via SSE<a href="#section-5.7-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.7-3.2">
+            <p id="section-5.7-3.2.1">Status updates delivered as events during protocol execution<a href="#section-5.7-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.7-3.3">
+            <p id="section-5.7-3.3.1">Partial artifacts available before protocol completion<a href="#section-5.7-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.7-4"><strong>Push Notifications</strong>: Long-running protocol operations use webhooks:<a href="#section-5.7-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.7-5.1">
+            <p id="section-5.7-5.1.1">Client configures push notification endpoint in task parameters<a href="#section-5.7-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.7-5.2">
+            <p id="section-5.7-5.2.1">Agent sends notifications as protocol progresses through states<a href="#section-5.7-5.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.7-5.3">
+            <p id="section-5.7-5.3.1">Client polls or retrieves final artifacts when notified of completion<a href="#section-5.7-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.7-6"><strong>Human-in-the-Loop Protocols</strong>: Protocols requiring user interaction:<a href="#section-5.7-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.7-7.1">
+            <p id="section-5.7-7.1.1">Task enters <code>input-required</code> state when user action needed<a href="#section-5.7-7.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.7-7.2">
+            <p id="section-5.7-7.2.1">Agent specifies required input through status message<a href="#section-5.7-7.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.7-7.3">
+            <p id="section-5.7-7.3.1">Client provides input in subsequent message, task resumes<a href="#section-5.7-7.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="recommendations-for-authors-1">
+<section id="section-5.8">
+        <h3 id="name-recommendations-for-authors-2">
+<a href="#section-5.8" class="section-number selfRef">5.8. </a><a href="#name-recommendations-for-authors-2" class="section-name selfRef">Recommendations for Authors</a>
+        </h3>
+<p id="section-5.8-1">To enable effective A2A-based agent interaction with specifications:<a href="#section-5.8-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-5.8-2">
+<li id="section-5.8-2.1">
+            <p id="section-5.8-2.1.1"><strong>Define Agent Card structure</strong>: Specify what an Agent Card should contain for agents implementing the specification, including supported media types, available skills, and authentication requirements.<a href="#section-5.8-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.8-2.2">
+            <p id="section-5.8-2.2.1"><strong>Map operations to skills</strong>: Identify each protocol operation or media type operation that should be exposed as an A2A skill, with clear descriptions and examples.<a href="#section-5.8-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.8-2.3">
+            <p id="section-5.8-2.3.1"><strong>Specify message structure</strong>: Document how protocol data maps to TextPart, FilePart, and DataPart, including MIME types for file content.<a href="#section-5.8-2.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.8-2.4">
+            <p id="section-5.8-2.4.1"><strong>Document task lifecycle</strong>: Describe what task states are relevant to protocol operations and what each state signifies.<a href="#section-5.8-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.8-2.5">
+            <p id="section-5.8-2.5.1"><strong>Address transport protocols</strong>: Indicate which A2A transport protocols (JSON-RPC, gRPC, HTTP+JSON) are appropriate for the specification's operations.<a href="#section-5.8-2.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.8-2.6">
+            <p id="section-5.8-2.6.1"><strong>Include Agent Card examples</strong>: Provide sample Agent Card JSON showing how the specification's capabilities should be declared.<a href="#section-5.8-2.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-5.8-2.7">
+            <p id="section-5.8-2.7.1"><strong>Specify asynchronous handling</strong>: For long-running operations, document how streaming or push notifications should be used.<a href="#section-5.8-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<p id="section-5.8-3">By defining how specifications map to A2A Agent Cards, skills, and tasks, authors enable independent agents to discover and interoperate with implementations of their specifications through standardized agent-to-agent communication.<a href="#section-5.8-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-6">
+      <h2 id="name-security-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<div id="prompt-injection">
+<section id="section-6.1">
+        <h3 id="name-prompt-injection">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-prompt-injection" class="section-name selfRef">Prompt Injection</a>
+        </h3>
+<p id="section-6.1-1">Prompt injection refers to a class of vulnerabilities in which an attacker crafts input text or prompts that, when processed by an agent or language model, causes the agent to behave in unauthorized or harmful ways. These attacks can range from subverting the intended output of the agent, causing it to leak sensitive information, manipulating operational decisions, escalating privileges, or even executing arbitrary code—if the agent has interfaces or plugins with system capabilities.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">Prompt injection risks are heightened in systems where agents accept and process user-supplied prompts without strong input validation, have the ability to execute code, or interact with external resources based on instructions parsed from prompts. Attackers may inject malicious payloads via API requests, user interface elements, document content, or network traffic, taking advantage of the agent’s ability to interpret and act on natural language instructions.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<div id="types-of-prompt-injection-attacks">
+<section id="section-6.1.1">
+          <h4 id="name-types-of-prompt-injection-a">
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-types-of-prompt-injection-a" class="section-name selfRef">Types of Prompt Injection Attacks</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.1-1.1">
+              <p id="section-6.1.1-1.1.1"><strong>Direct Injection</strong>: Crafting prompts that explicitly instruct the agent to ignore previous instructions, bypass restrictions, or output unauthorized content.<a href="#section-6.1.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.1-1.2">
+              <p id="section-6.1.1-1.2.1"><strong>Indirect or Cross-context Injection</strong>: Embedding malicious instructions in content that is later included in an agent’s context, such as email bodies, documents, or dynamically generated data.<a href="#section-6.1.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.1-1.3">
+              <p id="section-6.1.1-1.3.1"><strong>Training-set Poisoning</strong>: Seeding training or fine-tuning data with patterns that are later exploited by adversarial prompts.<a href="#section-6.1.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="mitigation-strategies">
+<section id="section-6.1.2">
+          <h4 id="name-mitigation-strategies">
+<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-mitigation-strategies" class="section-name selfRef">Mitigation Strategies</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.2-1.1">
+              <p id="section-6.1.2-1.1.1"><strong>Sandbox Execution</strong>: Ensure that any code executed by the agent occurs in a tightly sandboxed environment with strict controls over file system access, network connections, and privileges.<a href="#section-6.1.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.2">
+              <p id="section-6.1.2-1.2.1"><strong>Input Filtering and Validation</strong>: Apply rigorous input sanitization to any user-supplied prompts or data before issuing them to the agent. Filter out dangerous tokens, commands, or language patterns that could trigger undesired actions.<a href="#section-6.1.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.3">
+              <p id="section-6.1.2-1.3.1"><strong>Authentication and Authorization Controls</strong>: Use robust authentication mechanisms for agents capable of sensitive operations, and implement clear separation of roles so that agents can only perform actions explicitly permitted to them.<a href="#section-6.1.2-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.4">
+              <p id="section-6.1.2-1.4.1"><strong>Context Limitation</strong>: Reduce the amount and types of context that user input can influence. Avoid including untrusted content directly in the agent’s prompt or context window.<a href="#section-6.1.2-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.5">
+              <p id="section-6.1.2-1.5.1"><strong>Monitoring and Logging</strong>: Instrument agent interactions with detailed logging of prompt content, agent actions, and user activity to detect and investigate potential prompt injection incidents.<a href="#section-6.1.2-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.6">
+              <p id="section-6.1.2-1.6.1"><strong>Adversarial Testing</strong>: Regularly test systems with known and novel prompt injection scenarios to assess agent resilience and update mitigations accordingly.<a href="#section-6.1.2-1.6.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="recommendations-for-authors-and-implementers">
+<section id="section-6.1.3">
+          <h4 id="name-recommendations-for-authors-">
+<a href="#section-6.1.3" class="section-number selfRef">6.1.3. </a><a href="#name-recommendations-for-authors-" class="section-name selfRef">Recommendations for Authors and Implementers</a>
+          </h4>
+<p id="section-6.1.3-1">Agent considerations sections in specifications must recognize that agents are prime targets for prompt injection attacks, given their programmatic interpretation of textual input. Authors should:<a href="#section-6.1.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.1.3-2.1">
+              <p id="section-6.1.3-2.1.1">Explicitly describe how the agent will process prompts and what steps are taken to defend against injection.<a href="#section-6.1.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.3-2.2">
+              <p id="section-6.1.3-2.2.1">Identify contexts within the protocol or API where user-provided text may be interpreted as agent instructions.<a href="#section-6.1.3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.3-2.3">
+              <p id="section-6.1.3-2.3.1">Require manual review of deployed drafts and configuration templates for hidden or ambiguous agent instructions that could facilitate prompt injection.<a href="#section-6.1.3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.3-2.4">
+              <p id="section-6.1.3-2.4.1">Encourage multi-layered defenses, not relying solely on single techniques such as regular expressions.<a href="#section-6.1.3-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.1.3-3">When integrating agents into systems—especially those involving autonomous control, sensitive data processing, or third-party plugin capability—implementers should assume that prompt injection attempts will occur and plan risk mitigation accordingly.<a href="#section-6.1.3-3" class="pilcrow">¶</a></p>
+<p id="section-6.1.3-4">It is strongly recommended that internet draft documents are carefully reviewed and screened for possible prompt injection vectors before they are supplied to an agent, particularly in automated workflows or critical environments.<a href="#section-6.1.3-4" class="pilcrow">¶</a></p>
+<p id="section-6.1.3-5">For a more comprehensive understanding, see also <a href="https://owasp.org/www-project-llm-security/">OWASP LLM Top 10</a> and additional literature on AI prompt security.<a href="#section-6.1.3-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="improper-validation-of-generative-ai-output">
+<section id="section-6.2">
+        <h3 id="name-improper-validation-of-gene">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-improper-validation-of-gene" class="section-name selfRef">Improper Validation of Generative AI Output</a>
+        </h3>
+<p id="section-6.2-1">Improper validation of generative AI output occurs when a system invokes a generative AI or machine learning component (such as a large language model) whose behaviors and outputs cannot be directly controlled, but the system does not validate or insufficiently validates those outputs to ensure they align with intended security, content, or privacy policies. This weakness is documented as <a href="https://cwe.mitre.org/data/definitions/1426.html">CWE-1426</a>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">Unlike prompt injection attacks that manipulate inputs to the model, this weakness focuses on the failure to properly validate and sanitize outputs generated by AI components before those outputs are used, processed, or executed by downstream systems.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<div id="security-implications">
+<section id="section-6.2.1">
+          <h4 id="name-security-implications">
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-security-implications" class="section-name selfRef">Security Implications</a>
+          </h4>
+<p id="section-6.2.1-1">When generative AI outputs are not properly validated, they can be used to cause unpredictable agent behavior, particularly in agent-oriented settings where outputs may directly control or influence other agents or system components. The impact varies significantly depending on the capabilities granted to the tools or systems consuming the AI output, potentially including:<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.1-2.1">
+              <p id="section-6.2.1-2.1.1"><strong>Unauthorized Code Execution</strong>: If AI-generated output is directly fed into code execution environments, it may contain malicious commands, code injection payloads, or instructions that bypass security controls.<a href="#section-6.2.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-2.2">
+              <p id="section-6.2.1-2.2.1"><strong>Agent Manipulation</strong>: In multi-agent systems, unvalidated output from one agent may be used to influence or control other agents, leading to privilege escalation or unauthorized actions.<a href="#section-6.2.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-2.3">
+              <p id="section-6.2.1-2.3.1"><strong>Policy Violations</strong>: Outputs may violate security policies, content restrictions, or privacy requirements, particularly when dealing with sensitive data or restricted operations.<a href="#section-6.2.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.1-2.4">
+              <p id="section-6.2.1-2.4.1"><strong>Cross-Site Scripting (XSS)</strong>: When AI-generated content is rendered in web interfaces without proper sanitization, it may introduce XSS vulnerabilities, as demonstrated in real-world incidents such as <a href="https://www.cve.org/CVERecord?id=CVE-2024-3402">CVE-2024-3402</a>.<a href="#section-6.2.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="mitigation-strategies-1">
+<section id="section-6.2.2">
+          <h4 id="name-mitigation-strategies-2">
+<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-mitigation-strategies-2" class="section-name selfRef">Mitigation Strategies</a>
+          </h4>
+<p id="section-6.2.2-1">Since the output from a generative AI component cannot be inherently trusted, implementers should adopt multiple layers of validation and control:<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.2-2.1">
+              <p id="section-6.2.2-2.1.1"><strong>Untrusted Execution Environment</strong>: Ensure that generative AI components and any code or commands derived from their outputs operate in an untrusted or non-privileged space with strict sandboxing controls over file system access, network connections, and system privileges.<a href="#section-6.2.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.2">
+              <p id="section-6.2.2-2.2.1"><strong>Semantic Comparators</strong>: Use semantic comparison mechanisms to identify objects or content that might appear different but are semantically similar, helping detect attempts to bypass validation through variations in wording or structure.<a href="#section-6.2.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.3">
+              <p id="section-6.2.2-2.3.1"><strong>External Monitoring and Guardrails</strong>: Deploy supervisor components or guardrails that operate externally to the AI system to monitor output, validate content against security policies, and act as moderators before outputs are consumed by downstream systems.<a href="#section-6.2.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.4">
+              <p id="section-6.2.2-2.4.1"><strong>Structured Output Validation</strong>: Require outputs to conform to well-defined schemas or data structures, enabling automatic validation through format checking, type validation, and constraint enforcement.<a href="#section-6.2.2-2.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.5">
+              <p id="section-6.2.2-2.5.1"><strong>Content Filtering</strong>: Implement content filtering mechanisms that check for prohibited patterns, dangerous commands, or policy violations in generated outputs before they are processed or displayed.<a href="#section-6.2.2-2.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.6">
+              <p id="section-6.2.2-2.6.1"><strong>Training Data Quality</strong>: During model training and fine-tuning, use appropriate variety of both good and bad examples to guide preferred outputs and reduce the likelihood of generating problematic content.<a href="#section-6.2.2-2.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.7">
+              <p id="section-6.2.2-2.7.1"><strong>Output Encoding and Escaping</strong>: Apply appropriate encoding or escaping mechanisms when AI-generated content is rendered in contexts that interpret markup, scripts, or commands (e.g., HTML, SQL, shell commands).<a href="#section-6.2.2-2.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="recommendations-for-authors-and-implementers-1">
+<section id="section-6.2.3">
+          <h4 id="name-recommendations-for-authors-a">
+<a href="#section-6.2.3" class="section-number selfRef">6.2.3. </a><a href="#name-recommendations-for-authors-a" class="section-name selfRef">Recommendations for Authors and Implementers</a>
+          </h4>
+<p id="section-6.2.3-1">Specification authors should explicitly document:<a href="#section-6.2.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.3-2.1">
+              <p id="section-6.2.3-2.1.1"><strong>Output Validation Requirements</strong>: Specify what validation checks must be performed on AI-generated outputs before they are consumed by other system components or exposed to users.<a href="#section-6.2.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-2.2">
+              <p id="section-6.2.3-2.2.1"><strong>Security Boundaries</strong>: Clearly define the security boundaries and privilege levels for systems that process AI outputs, establishing what actions are permitted and what protections must be in place.<a href="#section-6.2.3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-2.3">
+              <p id="section-6.2.3-2.3.1"><strong>Schema Constraints</strong>: If outputs must conform to specific data formats or schemas, document these constraints clearly so implementers can validate outputs against expected structures.<a href="#section-6.2.3-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-2.4">
+              <p id="section-6.2.3-2.4.1"><strong>Fail-Safe Behaviors</strong>: Describe how systems should behave when validation fails—whether outputs should be rejected, logged, quarantined, or subject to additional review.<a href="#section-6.2.3-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.2.3-3">When implementing systems that consume generative AI outputs, implementers should:<a href="#section-6.2.3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.3-4.1">
+              <p id="section-6.2.3-4.1.1">Never trust AI outputs unconditionally, regardless of the source or apparent correctness of the generating component.<a href="#section-6.2.3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-4.2">
+              <p id="section-6.2.3-4.2.1">Implement validation layers that are independent of the AI component itself, following defense-in-depth principles.<a href="#section-6.2.3-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-4.3">
+              <p id="section-6.2.3-4.3.1">Test validation mechanisms against known adversarial outputs and edge cases to ensure they function correctly under attack.<a href="#section-6.2.3-4.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-4.4">
+              <p id="section-6.2.3-4.4.1">Log validation failures and suspicious outputs for security monitoring and incident response.<a href="#section-6.2.3-4.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-6.2.3-5">This weakness is distinct from prompt injection (discussed in the previous subsection) but often occurs in combination with it. Both weaknesses should be addressed comprehensively when designing and implementing agent-based systems. For additional guidance, see <a href="https://cwe.mitre.org/data/definitions/1426.html">CWE-1426</a> and related OWASP guidance on <a href="https://genai.owasp.org/llmrisk/llm02-insecure-output-handling/">insecure output handling</a>.<a href="#section-6.2.3-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-5">
+<section id="section-7">
       <h2 id="name-iana-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-5-1">This document has no IANA actions.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">This document has no IANA actions.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-6">
+<section id="section-8">
       <h2 id="name-references">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-6.1">
+<section id="section-8.1">
         <h3 id="name-normative-references">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
@@ -1404,11 +2372,19 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-6.2">
+<section id="section-8.2">
         <h3 id="name-informative-references">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="A2A">[A2A]</dt>
+        <dd>
+<span class="refTitle">"Agent2Agent (A2A) Protocol Official Specification"</span>, <time datetime="2025-06-18" class="refDate">18 June 2025</time>, <span>&lt;<a href="https://a2a-protocol.org/latest/specification/">https://a2a-protocol.org/latest/specification/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="MCP">[MCP]</dt>
+        <dd>
+<span class="refTitle">"Model Context Protocol"</span>, <time datetime="2025-06-18" class="refDate">18 June 2025</time>, <span>&lt;<a href="https://modelcontextprotocol.io/specification/2025-06-18">https://modelcontextprotocol.io/specification/2025-06-18</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC3552">[RFC3552]</dt>
         <dd>
 <span class="refAuthor">Rescorla, E.</span> and <span class="refAuthor">B. Korver</span>, <span class="refTitle">"Guidelines for Writing RFC Text on Security Considerations"</span>, <span class="seriesInfo">BCP 72</span>, <span class="seriesInfo">RFC 3552</span>, <span class="seriesInfo">DOI 10.17487/RFC3552</span>, <time datetime="2003-07" class="refDate">July 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3552">https://www.rfc-editor.org/rfc/rfc3552</a>&gt;</span>. </dd>
@@ -1436,8 +2412,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </div>
 <div id="authors-addresses">
 <section id="appendix-B">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Orie Steele</span></div>
@@ -1445,6 +2421,14 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <div class="email">
 <span>Email:</span>
 <a href="mailto:orie@or13.io" class="email">orie@or13.io</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Henk Birkholz</span></div>
+<div dir="auto" class="left"><span class="org">Fraunhofer SIT</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:henk.birkholz@ietf.contact" class="email">henk.birkholz@ietf.contact</a>
 </div>
 </address>
 </section>
