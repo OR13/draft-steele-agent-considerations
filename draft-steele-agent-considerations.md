@@ -54,7 +54,7 @@ informative:
 --- abstract
 
 IETF specifications provide the basis for technical implementation in several programming languages.
-An IETF specification that provides appropriate guidance to artificial intelligence (AI) agents, can enable such agents to consume specifiction and generate code from it. 
+An IETF specification that provides appropriate guidance to artificial intelligence (AI) agents, can enable such agents to consume specifiction and generate code from it.
 This documents defines the use of an Agent Consideration section that is in support of code generation including the use of agentcards, guidance on authorship, examples and their annotation for code generation, as well as language specific guidance for the production of media-types.
 The Agent Consideration defined in this document can be added to any Internet-Draft that includes normative language and sufficiant expressive examples derived from an included data model and protocol interaction defintions.
 
