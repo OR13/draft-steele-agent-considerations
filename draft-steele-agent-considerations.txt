@@ -5,8 +5,8 @@
 Network Working Group                                          O. Steele
 Internet-Draft                                              Tradeverifyd
 Intended status: Informational                               H. Birkholz
-Expires: 5 May 2026                                       Fraunhofer SIT
-                                                         1 November 2025
+Expires: 6 May 2026                                       Fraunhofer SIT
+                                                         2 November 2025
 
 
                           Agent Considerations
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 May 2026.
+   This Internet-Draft will expire on 6 May 2026.
 
 Copyright Notice
 
@@ -76,26 +76,11 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  Processing Considerations Sections
-     3.1.  Value to Authors and Implementers
-     3.2.  Value to Agents Assisting Implementation
-     3.3.  Guidance for Authors
-     3.4.  Agent Considerations
+     3.1.  Value to Agents Assisting Implementation
+     3.2.  Guidance for Authors
+     3.3.  Agent Considerations
    4.  Model Context Protocol Support
-     4.1.  MCP Resources for Internet Drafts
-     4.2.  MCP Prompts for Specifications
-     4.3.  MCP Tools for Specifications
-     4.4.  Media Type Specific Guidance
-     4.5.  Protocol Format Specific Guidance
-     4.6.  Recommendations for Authors
    5.  Agent2Agent Protocol Support
-     5.1.  A2A Agent Cards for Specifications
-     5.2.  A2A Skills for Specification Operations
-     5.3.  A2A Messages, Parts, and Artifacts
-     5.4.  A2A Tasks for Protocol Operations
-     5.5.  Media Type Specific Guidance for A2A
-     5.6.  Protocol Format Specific Guidance for A2A
-     5.7.  Streaming and Asynchronous Protocol Operations
-     5.8.  Recommendations for Authors
    6.  Security Considerations
      6.1.  Prompt Injection
        6.1.1.  Types of Prompt Injection Attacks
@@ -173,6 +158,34 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
+   Model Client:  Also referred to as an LLM client.  This is typically
+      a lower level interface which takes input and produces output.
+      The input is typically a prompt, and the output is typically a
+      response.
+
+   Agent:  A software system that extends one or more model clients with
+      context and tools.  Frequently used to provide a user with a
+      conversation interface to an assistant, which can retrieve
+      information and use tools to interact with external systems.
+
+   Agent Tools:  Descriptons of software capabilities and input and
+      output formats, that can be selected for use by agents in response
+      to prompts.  Tools typically provide agents with the ability to
+      use limited subsets of existing software systems, for example an
+      agent might choose to use a HTTP fetch tool to retrieve the
+      content of an RFC from a URL.
+
+   Context:  The information that is available to an agent when it is
+      responding to a prompt.  Context is typically provided by the
+      model client, and can include the prompt, the previous messages in
+      the conversation, and the tools that are available to the agent.
+
+   Coding Assistant:  An agent that is used to assist developers in
+      producing software implementations.  Coding assistants are
+      typically used to generate code from a specification.  In the case
+      that not specification exists, coding assistants respond to
+      prompts and guidance from the developer to produce software.
+
 3.  Processing Considerations Sections
 
    IETF documents commonly include dedicated sections addressing
@@ -180,39 +193,38 @@ Table of Contents
    technologies.  These consideration sections serve multiple critical
    purposes: they guide document authors in performing due diligence
    during protocol design, inform implementers and deployers about
-   potential risks and design trade-offs, and provide structured
-   guidance for agents assisting developers in producing software
-   implementations.
+   potential risks and design trade-offs, and with the adoption of
+   coding assistants, provide structured guidance for agents assisting
+   developers in producing software implementations.
 
-3.1.  Value to Authors and Implementers
+   Instead of mixing guidance for implementers and agents in each of
+   these sections, this document recommends that guidance for coding
+   assistants be centralized in an Agent Considerations section.
 
-   When developing specifications that involve agents—whether autonomous
-   systems, software agents, or AI-driven components—authors should
-   carefully evaluate the applicability of established consideration
-   frameworks.  These frameworks provide systematic approaches to
-   identifying and documenting design choices that affect security,
-   privacy, and operations.
+   It is appropriate to provide guidance to agents in the agent
+   considerations section, that provides advice regarding how the other
+   considerations sections should be processed, for example providing
+   guidance on how tables in IANA considerations should be used to
+   produce enumerations or lookup tables.
 
    *Security Considerations*: All IETF documents must include security
    analysis per [RFC3552].  This BCP defines the Internet threat model
    (passive and active attacks, eavesdropping, replay, man-in-the-
    middle, denial of service) and security goals (confidentiality,
-   integrity, authentication).  For agent-based systems, authors must
-   document:
+   integrity, authentication).
 
-   *  Threat modeling for autonomous decision-making and agent authority
+   Attacks specific to agent use of the protocol described in the
+   specification should be described in agent considerations, not in the
+   security considerations section.
 
-   *  Authentication and authorization mechanisms for agent actions
+   Similarly guidance to agents regarding the safe interpretation of the
+   specification should be described in agent considerations, and not
+   repeated in the security considerations section.
 
-   *  Protection against malicious agents or compromised agent behavior
-
-   *  Which attacks are in-scope versus out-of-scope and why
-
-   *  Cryptographic protections and their limitations
-
-   The structured threat analysis helps agents reading specifications
-   identify security-critical code paths, understand attack surfaces,
-   and generate appropriate security controls during implementation.
+   It is recommended to highlight parts of the security considerations
+   section that are particularly relevant to prompt injection or context
+   poisoning, in cases where protocol fields may be directly exposed to
+   agents through tools such as MCP or A2A.
 
    *Privacy Considerations*: Agent systems often collect, process, or
    transmit data about individuals through automated mechanisms.
@@ -244,70 +256,43 @@ Table of Contents
    correctly handle sensitive data, implement required consent flows,
    and avoid privacy-violating patterns.
 
-   *Operational Considerations*: Deploying and managing agent systems
-   presents unique operational challenges.  [RFC5706] guides authors to
-   address deployment aspects at the design phase rather than
-   retrofitting later:
+   *Operational Considerations*: [RFC5706] guides specification authors
+   to document deployment, management, and operational aspects of
+   protocols.  These sections describe installation procedures,
+   configuration parameters, monitoring requirements, fault detection
+   approaches, and interoperability requirements.  When coding
+   assistants read operational considerations sections, they interpret
+   this guidance to generate appropriate instrumentation, configuration
+   interfaces, and operational tooling in implementations.  For example,
+   if operational considerations specify that implementations should
+   expose metrics for monitoring protocol state transitions, agents can
+   generate code that emits these metrics in formats appropriate to the
+   target environment (such as Prometheus metrics, OpenTelemetry spans,
+   or structured logs).  Similarly, configuration parameters described
+   in operational considerations inform agents about what configuration
+   interfaces to expose and what validation constraints to apply to
+   configuration values.
 
-   *  Installation and initial setup procedures
+3.1.  Value to Agents Assisting Implementation
 
-   *  Migration paths from existing systems
+   Agents reading internet drafts benefit from well-structured
+   consideration sections that provide clear, actionable guidance.
+   Security considerations sections inform agents about required input
+   validation, authentication checks, cryptographic operations, and rate
+   limiting that must be implemented.  Privacy considerations specify
+   data minimization techniques, which identifiers should be ephemeral,
+   and what consent mechanisms are required before data collection.
+   Operational considerations inform agents which metrics to expose,
+   what configuration options to support, how to implement health
+   checks, and what management interfaces to provide.  By extracting
+   requirements from these sections, agents can generate implementations
+   that satisfy security, privacy, and operational requirements from the
+   outset, rather than requiring these concerns to be retrofitted later.
+   Well-documented consideration sections also enable agents to generate
+   appropriate test cases that verify security properties, privacy
+   protections, and operational characteristics.
 
-   *  Fault detection, isolation, and root cause analysis
-
-   *  Configuration management and verification
-
-   *  Performance monitoring at protocol, device, network, and service
-      levels
-
-   *  Impact on network operations
-
-   For agents, additional considerations include agent lifecycle
-   management, coordination between multiple agents, and mechanisms for
-   human oversight or intervention.  When agents assist in
-   implementation, operational considerations sections provide:
-
-   *  Deployment prerequisites and dependencies
-
-   *  Configuration parameters and valid ranges
-
-   *  Monitoring and telemetry requirements
-
-   *  Error conditions and recovery procedures
-
-   *  Interoperability requirements with existing systems
-
-3.2.  Value to Agents Assisting Implementation
-
-   Agents reading internet drafts to assist developers benefit
-   significantly from well-structured consideration sections.  These
-   sections provide machine-parseable patterns for:
-
-   1.  *Security Requirements Translation*: Agents can extract threat
-       models and map them to specific code requirements (input
-       validation, authentication checks, cryptographic operations, rate
-       limiting).
-
-   2.  *Privacy-by-Design Implementation*: Privacy considerations
-       specify what data minimization techniques to apply, which
-       identifiers should be ephemeral, and what consent mechanisms to
-       implement before data collection.
-
-   3.  *Operational Instrumentation*: Operational considerations inform
-       agents which metrics to expose, what configuration options to
-       support, how to implement health checks, and what management
-       interfaces to provide.
-
-   4.  *Testing and Validation*: Consideration sections identify attack
-       scenarios to test against, privacy properties to verify, and
-       operational failure modes to handle.
-
-   5.  *Documentation Generation*: Agents can extract deployment
-       requirements, configuration guidance, and operational procedures
-       from consideration sections to generate implementation
-       documentation.
-
-3.3.  Guidance for Authors
+3.2.  Guidance for Authors
 
    Authors should assess which consideration sections are relevant to
    their specification and provide substantive, specific analysis rather
@@ -327,7 +312,19 @@ Table of Contents
    assisting with implementation have sufficient information to build
    secure, privacy-respecting, and operationally manageable systems.
 
-3.4.  Agent Considerations
+   Avoid repeating guidance for implementers in the agent considerations
+   section.
+
+   Avoid providing "system prompts" or "agent job descriptions" in the
+   agent considerations section.  Examples of these frequently start
+   with "You are a helpful assistant that..." or "You are a helpful
+   assistant that...".
+
+   Typically an agent that is processing an internet draft will already
+   have somthing like these.  These prompts are more useful when feeding
+   text directly to an LLM client.
+
+3.3.  Agent Considerations
 
    This section provides an example agent considerations section.
 
@@ -335,564 +332,114 @@ Table of Contents
 
 4.  Model Context Protocol Support
 
-   The Model Context Protocol (MCP) [MCP] is an open protocol that
-   enables seamless integration between LLM applications and external
-   data sources and tools.  MCP standardizes how AI agents connect with
-   external resources through three primary server capabilities:
-   resources (context and data), prompts (templated workflows), and
-   tools (executable functions).
-
-   For authors of internet drafts, MCP provides a framework for
-   identifying what specification artifacts should be exposed to agents.
-   This section guides authors in determining which resources, prompts,
-   and tools are relevant to their specification, with particular focus
-   on media types and protocol formats.
-
-4.1.  MCP Resources for Internet Drafts
-
-   MCP resources represent context and data that agents can query.
-   Authors should identify which specification artifacts are valuable as
-   discrete resources:
-
-   *Media Type Definitions*: When a specification defines one or more
-   media types (e.g., application/example+json, application/
-   example+cbor):
-
-   *  Each media type definition should be exposed as a resource
-      containing the complete definition, parameters, and processing
-      requirements
-
-   *  Include references to the formal schema or grammar for the media
-      type
-
-   *  Provide examples in the media type format
-
-   *Protocol Format Specifications*: For specifications defining
-   protocol message formats:
-
-   *  Wire format definitions (binary layouts, encoding rules)
-
-   *  Message structure specifications (headers, payloads, trailers)
-
-   *  Serialization rules and constraints
-
-   *  ABNF grammars, CDDL schemas, JSON Schema, or other formal
-      notations
-
-   *Data Models*: Structured data model definitions:
-
-   *  Complete schema definitions (JSON Schema, CDDL, XML Schema, etc.)
-
-   *  Type definitions and constraints
-
-   *  Enumeration values and their semantics
-
-   *  Relationship specifications between data elements
-
-   *Format Examples*: Example messages, documents, or data structures:
-
-   *  Valid examples demonstrating correct format usage
-
-   *  Invalid examples demonstrating common errors
-
-   *  Edge cases and boundary conditions
-
-   *  Format variations (different encodings of the same logical
-      content)
-
-4.2.  MCP Prompts for Specifications
-
-   MCP prompts are templated workflows that guide agent interaction with
-   specifications.  Authors should consider which prompts would be
-   valuable:
-
-   *Media Type Implementation Prompt*: A prompt template for generating
-   media type handlers:
-
-Generate [language] code to parse and serialize [media-type-name].
-The implementation must conform to the format specification in [resource-ref].
-Include validation according to [schema-resource-ref].
-Generate test cases using examples from [examples-resource-ref].
-
-   *Protocol Format Parser Prompt*: A prompt template for generating
-   protocol parsers:
-
-   Generate a [language] parser for [protocol-name] messages.
-   Follow the wire format defined in [format-resource-ref].
-   Implement validation rules from [validation-resource-ref].
-   Handle error conditions specified in [errors-resource-ref].
-
-   *Format Validator Prompt*: A prompt template for generating
-   validators:
-
-   Generate a validator for [format-name] that checks:
-   - Schema conformance per [schema-resource-ref]
-   - Semantic constraints from [constraints-resource-ref]
-   - Security requirements from [security-resource-ref]
-
-   *Serialization Prompt*: A prompt template for format conversion:
-
-   Generate code to convert between [format-a] and [format-b].
-   Preserve semantics defined in [semantics-resource-ref].
-   Handle format-specific features per [features-resource-ref].
-
-4.3.  MCP Tools for Specifications
-
-   MCP tools are executable functions that servers expose.  Authors
-   should document which tools are relevant:
-
-   *Format Validators*: Tools that validate instances against
-   specification requirements:
-
-   *  Media type validators that check conformance to media type
-      definitions
-
-   *  Schema validators that verify data against formal schemas
-
-   *  Protocol validators that check message format compliance
-
-   *Format Converters*: Tools that transform between formats:
-
-   *  Conversion between different encodings (JSON ↔ CBOR, XML ↔ JSON)
-
-   *  Transformation between versions of a format
-
-   *  Canonical form generators
-
-   *Example Generators*: Tools that produce valid instances:
-
-   *  Random valid message generators for testing
-
-   *  Example generators based on schema definitions
-
-   *  Test vector generators for interoperability testing
-
-   *Parsers and Serializers*: Reference implementations as tools:
-
-   *  Parsers that accept format instances and produce structured data
-
-   *  Serializers that accept structured data and produce format
-      instances
-
-   *  Round-trip verification tools
-
-4.4.  Media Type Specific Guidance
-
-   When specifications define media types, authors should ensure MCP
-   resources include:
-
-   *Media Type Registration Information*: - Type name (e.g.,
-   application/example+json) - Required parameters and optional
-   parameters - Encoding considerations - Security considerations
-   specific to the media type - Interoperability considerations -
-   Fragment identifier syntax (if applicable)
-
-   *Format Schema*: - Complete formal schema in appropriate notation
-   (JSON Schema for +json types, CDDL for +cbor types) - Schema
-   versioning information - Extension points and their usage
-
-   *Processing Model*: - How recipients should process instances of the
-   media type - Required processing steps - Optional processing
-   capabilities - Error handling requirements
-
-   *Content Negotiation Guidance*: - How the media type participates in
-   content negotiation - Relationship to other media types - Quality
-   parameters and their interpretation
-
-4.5.  Protocol Format Specific Guidance
-
-   For specifications defining protocol formats, authors should ensure
-   MCP resources include:
-
-   *Wire Format Definitions*: - Binary layout specifications with byte
-   ordering - Field definitions with types, sizes, and offsets -
-   Encoding rules (fixed-width, variable-length, compressed, etc.) -
-   Alignment and padding requirements
-
-   *Message Structure*: - Message types and their numeric identifiers -
-   Header formats and required fields - Payload structure and content
-   rules - Trailer or footer formats - Message framing and delimitation
-
-   *State Machine Specifications*: - Protocol states and transitions -
-   Message exchange patterns - Valid message sequences - Error states
-   and recovery procedures
-
-   *Extension Mechanisms*: - How the protocol supports extensions -
-   Extension registration requirements - Parsing rules for unknown
-   extensions - Versioning and compatibility rules
-
-4.6.  Recommendations for Authors
-
-   To enable effective MCP-based agent interaction with specifications:
-
-   1.  *Explicitly list MCP resources*: In the Agent Considerations
-       section, enumerate which specification artifacts should be
-       exposed as MCP resources.
-
-   2.  *Provide prompt templates*: Include example prompts that agents
-       can use to generate implementations of media types or protocol
-       formats defined in the specification.
-
-   3.  *Document validation tools*: Specify what validation tools should
-       exist and what properties they must check.
-
-   4.  *Reference formal schemas*: Ensure all media types and protocol
-       formats have machine-readable formal definitions that can be
-       exposed as MCP resources.
-
-   5.  *Include test vectors*: Provide comprehensive examples that can
-       be used by MCP tools for validation and testing.
-
-   By identifying relevant MCP resources, prompts, and tools for their
-   specifications, authors enable agents to provide more effective
-   implementation assistance for media types and protocol formats.
+   The Model Context Protocol (MCP) [MCP] enables LLM applications to
+   integrate with external data sources and tools through standardized
+   resources, prompts, and tools.  For authors of internet drafts,
+   understanding MCP helps structure specifications so that coding
+   assistants can consume them effectively and generate incrementally
+   verifiable implementations.
+
+   When specifications define media types, authors should provide formal
+   schemas in appropriate notations matched to the media type suffix.
+   JSON-based media types (those with +json suffixes like application/
+   example+json) should include JSON Schema definitions.  CBOR-based
+   media types (with +cbor suffixes) should include CDDL (Concise Data
+   Definition Language) schemas.  Text-based protocol formats should
+   include ABNF (Augmented Backus-Naur Form) grammars.  XML-based
+   formats should reference XML Schema or RelaxNG definitions.  These
+   machine-readable formal definitions serve as MCP resources that
+   agents query when generating parsers, serializers, and validators.
+   The formal schema should be complete and normative, not merely
+   illustrative.
+
+   Authors should align terminology consistently across prose
+   descriptions, formal schemas, and examples.  When a specification
+   introduces a term like "credential" or "token", that exact term
+   should appear in CDDL type names, JSON Schema property names, ABNF
+   rule names, and example field identifiers.  This consistency enables
+   agents to correlate requirements across specification sections,
+   reducing ambiguity during code generation.  For example, if prose
+   describes a "credential identifier" field, the JSON Schema should use
+   the property name credentialIdentifier (or credential_identifier
+   following the specification's naming convention), the CDDL definition
+   should reference the same term, and examples should use that exact
+   field name.
+
+   Diagrams illustrating protocol message flows, state transitions, or
+   data structure relationships provide essential context for agents
+   generating integration code.  Sequence diagrams showing message
+   exchanges help agents understand the order of operations and
+   dependencies between protocol steps.  State machine diagrams clarify
+   valid transitions and error handling paths.  Data model diagrams
+   showing relationships between types assist agents in generating
+   appropriate foreign key constraints or reference resolution code.
+   These visual aids complement formal notations by conveying structural
+   relationships that may be implicit in textual descriptions.
+
+   For incremental verification, specifications should provide examples
+   in order of increasing complexity.  Begin with minimal valid
+   instances containing only required fields, demonstrating the simplest
+   conformant case.  Subsequent examples should progressively add
+   optional features, extension points, and advanced capabilities.
+   Include examples demonstrating common error conditions and their
+   proper handling.  Each example should be annotated with references to
+   the formal schema rules it exercises and the normative requirements
+   it illustrates.  Agents can use these examples as test cases,
+   implementing functionality incrementally and verifying correctness at
+   each step by validating generated code against the provided examples.
+
+   When specifications define format conversions (such as JSON to CBOR
+   encoding or canonical form generation), provide paired examples
+   showing the same logical content in both representations.  These
+   paired examples enable agents to generate and validate conversion
+   code by ensuring round-trip fidelity.  The specification should
+   clearly indicate which encoding is canonical and what normalization
+   steps are required for canonicalization.
 
 5.  Agent2Agent Protocol Support
 
-   The Agent2Agent Protocol (A2A) [A2A] is an open standard enabling
-   communication between independent AI agent systems.  A2A facilitates
-   agent-to-agent communication through capability discovery, task
-   delegation, and collaborative work on complex requests.  Unlike MCP
-   which focuses on LLM application integration with data sources, A2A
-   targets inter-agent communication in distributed agentic ecosystems.
-
-   For authors of internet drafts, A2A provides a framework for exposing
-   specification capabilities as discoverable agent skills.  This
-   section guides authors in determining how media types, protocol
-   formats, and operations defined in their specifications should be
-   exposed through A2A Agent Cards, skills, and task interfaces.
-
-5.1.  A2A Agent Cards for Specifications
-
-   An Agent Card is a JSON manifest describing an agent's identity,
-   capabilities, authentication requirements, and supported operations.
-   When a specification defines media types or protocol operations,
-   authors should consider what would appear in an Agent Card for an
-   agent implementing that specification:
-
-   *Media Type Support*: Agent Cards declare supported content types
-   through input and output modes:
-
-   *  defaultInputModes: MIME types the agent accepts (e.g.,
-      ["application/example+json", "application/example+cbor"])
-
-   *  defaultOutputModes: MIME types the agent produces
-
-   *  Per-skill mode overrides for operations with specific format
-      requirements
-
-   *Transport Protocols*: Agent Cards specify available transports:
-
-   *  preferredTransport: Primary protocol binding (JSON-RPC, gRPC, or
-      HTTP+JSON)
-
-   *  additionalInterfaces: Alternative transport endpoints
-
-   *  url: Primary endpoint for accessing the agent
-
-   *Authentication Requirements*: Agent Cards declare security schemes:
-
-   *  securitySchemes: Authentication methods (Bearer tokens, API keys,
-      OAuth2)
-
-   *  security: Required authentication for agent access
-
-   *  Skill-level security requirements for operation-specific
-      authorization
-
-   *Protocol Capabilities*: Agent Cards indicate protocol features:
-
-   *  Streaming support for incremental results
-
-   *  Push notification capability for asynchronous operations
-
-   *  State transition history support for auditability
-
-5.2.  A2A Skills for Specification Operations
-
-   Skills represent distinct agent capabilities corresponding to
-   operations defined in specifications.  Authors should identify which
-   specification operations map to A2A skills:
-
-   *Protocol Operation Skills*: Each protocol operation becomes a skill:
-
-   *  *Identification*: Unique skill ID (e.g., validate-credential,
-      issue-token)
-
-   *  *Description*: Clear explanation of what the operation does
-
-   *  *Examples*: Sample requests showing how to invoke the operation
-
-   *  *Input/Output Modes*: Media types consumed and produced by the
-      operation
-
-   *Format Transformation Skills*: Skills for converting between
-   formats:
-
-   *  Skills for encoding transformations (JSON to CBOR, canonical form
-      generation)
-
-   *  Skills for version migration (v1 format to v2 format)
-
-   *  Skills for format validation and verification
-
-   *Validation Skills*: Skills for checking conformance:
-
-   *  Schema validation skills that verify instances against formal
-      definitions
-
-   *  Protocol compliance skills that check message format correctness
-
-   *  Semantic validation skills that enforce business rules
-
-   *Query and Retrieval Skills*: Skills for accessing specification
-   artifacts:
-
-   *  Skills to retrieve schema definitions
-
-   *  Skills to fetch example instances
-
-   *  Skills to query specification metadata
-
-5.3.  A2A Messages, Parts, and Artifacts
-
-   A2A structures communication through messages containing parts, with
-   outputs delivered as artifacts.  Authors should consider how
-   specification data maps to these structures:
-
-   *Message Structure*: Messages have a role (user or agent) and contain
-   parts:
-
-   *  User messages containing protocol requests
-
-   *  Agent messages containing protocol responses
-
-   *  Multi-turn conversations for stateful protocol interactions
-
-   *Part Types for Specification Data*:
-
-   *TextPart*: Plain text content appropriate for: - Human-readable
-   explanations - Log messages and diagnostic output - Textual protocol
-   representations
-
-   *FilePart*: File content with MIME type, suitable for: - Media type
-   instances as files - Large protocol messages - Binary format examples
-   - References via URI or embedded bytes
-
-   *DataPart*: Structured JSON data, ideal for: - Protocol parameters
-   and configuration - Structured validation results - Metadata about
-   media types or formats - API request/response payloads
-
-   *Artifacts for Protocol Outputs*: Artifacts contain generated
-   outputs: - Valid instances of media types produced by generation
-   skills - Validation reports from conformance checking skills -
-   Transformed data from format conversion skills - Test vectors for
-   interoperability verification
-
-5.4.  A2A Tasks for Protocol Operations
-
-   Tasks represent work units with defined lifecycle states.  Protocol
-   operations exposed through A2A become tasks with specific
-   characteristics:
-
-   *Task States for Protocol Operations*:
-
-   *  queued: Operation accepted but not yet started
-
-   *  in-progress: Protocol operation executing
-
-   *  auth-required: Operation needs additional authorization
-
-   *  input-required: Operation needs more parameters
-
-   *  completed: Protocol operation succeeded, artifacts contain results
-
-   *  rejected: Operation request invalid or malformed
-
-   *  failed: Protocol operation encountered error
-
-   *  canceled: Operation terminated by client request
-
-   *Task History*: Protocol interactions recorded as message turns: -
-   Initial request with operation parameters - Intermediate status
-   updates for long-running operations - Final response with operation
-   results
-
-   *Task Context*: Related protocol operations grouped by context
-   identifier: - Multiple operations in a protocol session share context
-   - Stateful protocols maintain context across task sequences
-
-   *Asynchronous Operations*: Long-running protocol operations use push
-   notifications: - Client registers webhook for status updates - Agent
-   sends notifications as operation progresses - Client retrieves final
-   artifacts when task completes
-
-5.5.  Media Type Specific Guidance for A2A
-
-   When specifications define media types, authors should document how
-   they appear in A2A interfaces:
-
-   *Agent Card Media Type Declaration*:
-
-   {
-     "defaultInputModes": ["application/example+json"],
-     "defaultOutputModes": ["application/example+json"],
-     "skills": [
-       {
-         "id": "parse-example",
-         "name": "Parse Example Format",
-         "description": "Parse and validate application/example+json instances",
-         "inputModes": ["application/example+json"],
-         "outputModes": ["application/json"]
-       }
-     ]
-   }
-
-   *Media Type Processing Skills*: Define skills for each media type
-   operation:
-
-   *  Parsing skills that accept media type instances as FilePart inputs
-
-   *  Serialization skills that produce media type instances as FilePart
-      outputs
-
-   *  Validation skills that check media type conformance
-
-   *Media Type Parameters*: Handle media type parameters through
-   DataPart:
-
-   *  Parameters passed as structured JSON in DataPart
-
-   *  Validation results returned as DataPart with structured
-      diagnostics
-
-   *  Configuration options specified via DataPart
-
-   *Content Negotiation*: Specify multiple output modes in skills:
-
-   *  List all supported encoding variants in outputModes
-
-   *  Client requests preferred format through task parameters
-
-   *  Agent returns content in negotiated format
-
-5.6.  Protocol Format Specific Guidance for A2A
-
-   For specifications defining protocol formats, authors should document
-   A2A exposure:
-
-   *Protocol Message Skills*: Define skills for protocol operations:
-
-   {
-     "id": "protocol-request",
-     "name": "Process Protocol Request",
-     "description": "Handle protocol request message per RFC XXXX",
-     "inputModes": ["application/protocol+cbor"],
-     "outputModes": ["application/protocol+cbor"],
-     "examples": [
-       "Process authentication request",
-       "Handle data query message"
-     ]
-   }
-
-   *Wire Format Handling*: Protocol formats map to A2A parts:
-
-   *  Binary protocol messages as FilePart with appropriate MIME type
-
-   *  Protocol parameters as DataPart with structured JSON
-
-   *  Protocol responses as artifacts containing FilePart outputs
-
-   *State Machine Operations*: Protocol states map to task states:
-
-   *  Protocol session establishment creates task with context
-
-   *  Protocol state transitions reflected in task status updates
-
-   *  Protocol session termination completes or cancels task
-
-   *Multi-Message Protocols*: Conversational protocols use task history:
-
-   *  Each protocol message becomes a message turn in task history
-
-   *  Client and agent roles map to protocol participants
-
-   *  Context groups related protocol message exchanges
-
-   *Transport Binding*: Protocol formats support multiple A2A
-   transports:
-
-   *  JSON-RPC for protocols with RPC-like semantics
-
-   *  gRPC for protocols requiring high performance
-
-   *  HTTP+JSON for protocols with RESTful patterns
-
-5.7.  Streaming and Asynchronous Protocol Operations
-
-   A2A provides streaming and push notification capabilities for
-   protocol operations:
-
-   *Streaming Protocol Responses*: Use message/stream for incremental
-   output:
-
-   *  Protocol operations producing progressive results stream via SSE
-
-   *  Status updates delivered as events during protocol execution
-
-   *  Partial artifacts available before protocol completion
-
-   *Push Notifications*: Long-running protocol operations use webhooks:
-
-   *  Client configures push notification endpoint in task parameters
-
-   *  Agent sends notifications as protocol progresses through states
-
-   *  Client polls or retrieves final artifacts when notified of
-      completion
-
-   *Human-in-the-Loop Protocols*: Protocols requiring user interaction:
-
-   *  Task enters input-required state when user action needed
-
-   *  Agent specifies required input through status message
-
-   *  Client provides input in subsequent message, task resumes
-
-5.8.  Recommendations for Authors
-
-   To enable effective A2A-based agent interaction with specifications:
-
-   1.  *Define Agent Card structure*: Specify what an Agent Card should
-       contain for agents implementing the specification, including
-       supported media types, available skills, and authentication
-       requirements.
-
-   2.  *Map operations to skills*: Identify each protocol operation or
-       media type operation that should be exposed as an A2A skill, with
-       clear descriptions and examples.
-
-   3.  *Specify message structure*: Document how protocol data maps to
-       TextPart, FilePart, and DataPart, including MIME types for file
-       content.
-
-   4.  *Document task lifecycle*: Describe what task states are relevant
-       to protocol operations and what each state signifies.
-
-   5.  *Address transport protocols*: Indicate which A2A transport
-       protocols (JSON-RPC, gRPC, HTTP+JSON) are appropriate for the
-       specification's operations.
-
-   6.  *Include Agent Card examples*: Provide sample Agent Card JSON
-       showing how the specification's capabilities should be declared.
-
-   7.  *Specify asynchronous handling*: For long-running operations,
-       document how streaming or push notifications should be used.
-
-   By defining how specifications map to A2A Agent Cards, skills, and
-   tasks, authors enable independent agents to discover and interoperate
-   with implementations of their specifications through standardized
-   agent-to-agent communication.
+   The Agent2Agent Protocol (A2A) [A2A] enables communication between
+   independent AI agent systems through capability discovery and task
+   delegation.  Unlike MCP which focuses on LLM integration with data
+   sources, A2A targets inter-agent communication where agents expose
+   capabilities through Agent Cards and interact via structured tasks.
+
+   When specifications define protocol operations or media types,
+   authors should consider how these capabilities would be declared in
+   an Agent Card.  An Agent Card is a JSON manifest listing supported
+   media types through inputModes and outputModes fields, declaring
+   available operations as skills with unique identifiers and
+   descriptions, and specifying authentication requirements and
+   transport protocols.  For example, a specification defining
+   application/example+cbor would indicate this MIME type in the Agent
+   Card's mode declarations, with skills representing operations like
+   parsing, validation, or format conversion.  Each skill should
+   reference the formal schema (CDDL for CBOR types, JSON Schema for
+   JSON types, ABNF for text formats) that defines valid inputs and
+   outputs.
+
+   A2A structures communication through messages containing parts
+   (TextPart for prose, FilePart for media type instances, DataPart for
+   structured parameters) and delivers outputs as artifacts.  Authors
+   should document how protocol data maps to these part types.  Media
+   type instances typically map to FilePart with the appropriate MIME
+   type, while validation results or protocol parameters map to DataPart
+   containing structured JSON.  For incremental verification,
+   specifications should indicate which operations can be tested
+   independently versus which require stateful task sequences.  Protocol
+   operations that maintain state across multiple steps should document
+   how the task context groups related operations and how task states
+   (queued, in-progress, completed, failed) correspond to protocol
+   states.
+
+   For specifications defining stateful protocols, document the
+   correspondence between protocol state machines and A2A task
+   lifecycles.  Long-running operations should specify whether they
+   support streaming responses or push notifications, enabling agents to
+   provide progress updates and handle asynchronous workflows.  When
+   protocols require multi-step interactions (such as challenge-response
+   authentication or multi-phase transactions), describe how these map
+   to task history with message turns between user and agent roles.
 
 6.  Security Considerations
 
