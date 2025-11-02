@@ -76,10 +76,9 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  Processing Considerations Sections
-     3.1.  Value to Authors and Implementers
-     3.2.  Value to Agents Assisting Implementation
-     3.3.  Guidance for Authors
-     3.4.  Agent Considerations
+     3.1.  Value to Agents Assisting Implementation
+     3.2.  Guidance for Authors
+     3.3.  Agent Considerations
    4.  Model Context Protocol Support
    5.  Agent2Agent Protocol Support
    6.  Security Considerations
@@ -159,6 +158,34 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
+   Model Client:  Also referred to as an LLM client.  This is typically
+      a lower level interface which takes input and produces output.
+      The input is typically a prompt, and the output is typically a
+      response.
+
+   Agent:  A software system that extends one or more model clients with
+      context and tools.  Frequently used to provide a user with a
+      conversation interface to an assistant, which can retrieve
+      information and use tools to interact with external systems.
+
+   Agent Tools:  Descriptons of software capabilities and input and
+      output formats, that can be selected for use by agents in response
+      to prompts.  Tools typically provide agents with the ability to
+      use limited subsets of existing software systems, for example an
+      agent might choose to use a HTTP fetch tool to retrieve the
+      content of an RFC from a URL.
+
+   Context:  The information that is available to an agent when it is
+      responding to a prompt.  Context is typically provided by the
+      model client, and can include the prompt, the previous messages in
+      the conversation, and the tools that are available to the agent.
+
+   Coding Assistant:  An agent that is used to assist developers in
+      producing software implementations.  Coding assistants are
+      typically used to generate code from a specification.  In the case
+      that not specification exists, coding assistants respond to
+      prompts and guidance from the developer to produce software.
+
 3.  Processing Considerations Sections
 
    IETF documents commonly include dedicated sections addressing
@@ -166,39 +193,38 @@ Table of Contents
    technologies.  These consideration sections serve multiple critical
    purposes: they guide document authors in performing due diligence
    during protocol design, inform implementers and deployers about
-   potential risks and design trade-offs, and provide structured
-   guidance for agents assisting developers in producing software
-   implementations.
+   potential risks and design trade-offs, and with the adoption of
+   coding assistants, provide structured guidance for agents assisting
+   developers in producing software implementations.
 
-3.1.  Value to Authors and Implementers
+   Instead of mixing guidance for implementers and agents in each of
+   these sections, this document recommends that guidance for coding
+   assistants be centralized in an Agent Considerations section.
 
-   When developing specifications that involve agents—whether autonomous
-   systems, software agents, or AI-driven components—authors should
-   carefully evaluate the applicability of established consideration
-   frameworks.  These frameworks provide systematic approaches to
-   identifying and documenting design choices that affect security,
-   privacy, and operations.
+   It is appropriate to provide guidance to agents in the agent
+   considerations section, that provides advice regarding how the other
+   considerations sections should be processed, for example providing
+   guidance on how tables in IANA considerations should be used to
+   produce enumerations or lookup tables.
 
    *Security Considerations*: All IETF documents must include security
    analysis per [RFC3552].  This BCP defines the Internet threat model
    (passive and active attacks, eavesdropping, replay, man-in-the-
    middle, denial of service) and security goals (confidentiality,
-   integrity, authentication).  For agent-based systems, authors must
-   document:
+   integrity, authentication).
 
-   *  Threat modeling for autonomous decision-making and agent authority
+   Attacks specific to agent use of the protocol described in the
+   specification should be described in agent considerations, not in the
+   security considerations section.
 
-   *  Authentication and authorization mechanisms for agent actions
+   Similarly guidance to agents regarding the safe interpretation of the
+   specification should be described in agent considerations, and not
+   repeated in the security considerations section.
 
-   *  Protection against malicious agents or compromised agent behavior
-
-   *  Which attacks are in-scope versus out-of-scope and why
-
-   *  Cryptographic protections and their limitations
-
-   The structured threat analysis helps agents reading specifications
-   identify security-critical code paths, understand attack surfaces,
-   and generate appropriate security controls during implementation.
+   It is recommended to highlight parts of the security considerations
+   section that are particularly relevant to prompt injection or context
+   poisoning, in cases where protocol fields may be directly exposed to
+   agents through tools such as MCP or A2A.
 
    *Privacy Considerations*: Agent systems often collect, process, or
    transmit data about individuals through automated mechanisms.
@@ -230,70 +256,43 @@ Table of Contents
    correctly handle sensitive data, implement required consent flows,
    and avoid privacy-violating patterns.
 
-   *Operational Considerations*: Deploying and managing agent systems
-   presents unique operational challenges.  [RFC5706] guides authors to
-   address deployment aspects at the design phase rather than
-   retrofitting later:
+   *Operational Considerations*: [RFC5706] guides specification authors
+   to document deployment, management, and operational aspects of
+   protocols.  These sections describe installation procedures,
+   configuration parameters, monitoring requirements, fault detection
+   approaches, and interoperability requirements.  When coding
+   assistants read operational considerations sections, they interpret
+   this guidance to generate appropriate instrumentation, configuration
+   interfaces, and operational tooling in implementations.  For example,
+   if operational considerations specify that implementations should
+   expose metrics for monitoring protocol state transitions, agents can
+   generate code that emits these metrics in formats appropriate to the
+   target environment (such as Prometheus metrics, OpenTelemetry spans,
+   or structured logs).  Similarly, configuration parameters described
+   in operational considerations inform agents about what configuration
+   interfaces to expose and what validation constraints to apply to
+   configuration values.
 
-   *  Installation and initial setup procedures
+3.1.  Value to Agents Assisting Implementation
 
-   *  Migration paths from existing systems
+   Agents reading internet drafts benefit from well-structured
+   consideration sections that provide clear, actionable guidance.
+   Security considerations sections inform agents about required input
+   validation, authentication checks, cryptographic operations, and rate
+   limiting that must be implemented.  Privacy considerations specify
+   data minimization techniques, which identifiers should be ephemeral,
+   and what consent mechanisms are required before data collection.
+   Operational considerations inform agents which metrics to expose,
+   what configuration options to support, how to implement health
+   checks, and what management interfaces to provide.  By extracting
+   requirements from these sections, agents can generate implementations
+   that satisfy security, privacy, and operational requirements from the
+   outset, rather than requiring these concerns to be retrofitted later.
+   Well-documented consideration sections also enable agents to generate
+   appropriate test cases that verify security properties, privacy
+   protections, and operational characteristics.
 
-   *  Fault detection, isolation, and root cause analysis
-
-   *  Configuration management and verification
-
-   *  Performance monitoring at protocol, device, network, and service
-      levels
-
-   *  Impact on network operations
-
-   For agents, additional considerations include agent lifecycle
-   management, coordination between multiple agents, and mechanisms for
-   human oversight or intervention.  When agents assist in
-   implementation, operational considerations sections provide:
-
-   *  Deployment prerequisites and dependencies
-
-   *  Configuration parameters and valid ranges
-
-   *  Monitoring and telemetry requirements
-
-   *  Error conditions and recovery procedures
-
-   *  Interoperability requirements with existing systems
-
-3.2.  Value to Agents Assisting Implementation
-
-   Agents reading internet drafts to assist developers benefit
-   significantly from well-structured consideration sections.  These
-   sections provide machine-parseable patterns for:
-
-   1.  *Security Requirements Translation*: Agents can extract threat
-       models and map them to specific code requirements (input
-       validation, authentication checks, cryptographic operations, rate
-       limiting).
-
-   2.  *Privacy-by-Design Implementation*: Privacy considerations
-       specify what data minimization techniques to apply, which
-       identifiers should be ephemeral, and what consent mechanisms to
-       implement before data collection.
-
-   3.  *Operational Instrumentation*: Operational considerations inform
-       agents which metrics to expose, what configuration options to
-       support, how to implement health checks, and what management
-       interfaces to provide.
-
-   4.  *Testing and Validation*: Consideration sections identify attack
-       scenarios to test against, privacy properties to verify, and
-       operational failure modes to handle.
-
-   5.  *Documentation Generation*: Agents can extract deployment
-       requirements, configuration guidance, and operational procedures
-       from consideration sections to generate implementation
-       documentation.
-
-3.3.  Guidance for Authors
+3.2.  Guidance for Authors
 
    Authors should assess which consideration sections are relevant to
    their specification and provide substantive, specific analysis rather
@@ -313,7 +312,19 @@ Table of Contents
    assisting with implementation have sufficient information to build
    secure, privacy-respecting, and operationally manageable systems.
 
-3.4.  Agent Considerations
+   Avoid repeating guidance for implementers in the agent considerations
+   section.
+
+   Avoid providing "system prompts" or "agent job descriptions" in the
+   agent considerations section.  Examples of these frequently start
+   with "You are a helpful assistant that..." or "You are a helpful
+   assistant that...".
+
+   Typically an agent that is processing an internet draft will already
+   have somthing like these.  These prompts are more useful when feeding
+   text directly to an LLM client.
+
+3.3.  Agent Considerations
 
    This section provides an example agent considerations section.
 
