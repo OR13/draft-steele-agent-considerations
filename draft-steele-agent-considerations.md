@@ -129,36 +129,11 @@ Authors should evaluate whether agents create new privacy threats through automa
 
 This structured privacy analysis enables implementing agents to correctly handle sensitive data, implement required consent flows, and avoid privacy-violating patterns.
 
-**Operational Considerations**: Deploying and managing agent systems presents unique operational challenges. {{-OPERATIONAL-CONSIDERATIONS}} guides authors to address deployment aspects at the design phase rather than retrofitting later:
-
-- Installation and initial setup procedures
-- Migration paths from existing systems
-- Fault detection, isolation, and root cause analysis
-- Configuration management and verification
-- Performance monitoring at protocol, device, network, and service levels
-- Impact on network operations
-
-For agents, additional considerations include agent lifecycle management, coordination between multiple agents, and mechanisms for human oversight or intervention. When agents assist in implementation, operational considerations sections provide:
-
-- Deployment prerequisites and dependencies
-- Configuration parameters and valid ranges
-- Monitoring and telemetry requirements
-- Error conditions and recovery procedures
-- Interoperability requirements with existing systems
+**Operational Considerations**: {{-OPERATIONAL-CONSIDERATIONS}} guides specification authors to document deployment, management, and operational aspects of protocols. These sections describe installation procedures, configuration parameters, monitoring requirements, fault detection approaches, and interoperability requirements. When coding assistants read operational considerations sections, they interpret this guidance to generate appropriate instrumentation, configuration interfaces, and operational tooling in implementations. For example, if operational considerations specify that implementations should expose metrics for monitoring protocol state transitions, agents can generate code that emits these metrics in formats appropriate to the target environment (such as Prometheus metrics, OpenTelemetry spans, or structured logs). Similarly, configuration parameters described in operational considerations inform agents about what configuration interfaces to expose and what validation constraints to apply to configuration values.
 
 ## Value to Agents Assisting Implementation
 
-Agents reading internet drafts to assist developers benefit significantly from well-structured consideration sections. These sections provide machine-parseable patterns for:
-
-1. **Security Requirements Translation**: Agents can extract threat models and map them to specific code requirements (input validation, authentication checks, cryptographic operations, rate limiting).
-
-2. **Privacy-by-Design Implementation**: Privacy considerations specify what data minimization techniques to apply, which identifiers should be ephemeral, and what consent mechanisms to implement before data collection.
-
-3. **Operational Instrumentation**: Operational considerations inform agents which metrics to expose, what configuration options to support, how to implement health checks, and what management interfaces to provide.
-
-4. **Testing and Validation**: Consideration sections identify attack scenarios to test against, privacy properties to verify, and operational failure modes to handle.
-
-5. **Documentation Generation**: Agents can extract deployment requirements, configuration guidance, and operational procedures from consideration sections to generate implementation documentation.
+Agents reading internet drafts benefit from well-structured consideration sections that provide clear, actionable guidance. Security considerations sections inform agents about required input validation, authentication checks, cryptographic operations, and rate limiting that must be implemented. Privacy considerations specify data minimization techniques, which identifiers should be ephemeral, and what consent mechanisms are required before data collection. Operational considerations inform agents which metrics to expose, what configuration options to support, how to implement health checks, and what management interfaces to provide. By extracting requirements from these sections, agents can generate implementations that satisfy security, privacy, and operational requirements from the outset, rather than requiring these concerns to be retrofitted later. Well-documented consideration sections also enable agents to generate appropriate test cases that verify security properties, privacy protections, and operational characteristics.
 
 ## Guidance for Authors
 
