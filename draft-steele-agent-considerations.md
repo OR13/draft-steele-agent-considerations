@@ -106,7 +106,7 @@ Instead of mixing guidance for implementers and agents in each of these sections
 
 It is appropriate to provide guidance to agents in the agent considerations section, that provides advice regarding how the other considerations sections should be processed, for example providing guidance on how tables in IANA considerations should be used to produce enumerations or lookup tables.
 
-**Security Considerations**: All IETF documents must include security analysis per {{-SECURITY-CONSIDERATIONS}}. This BCP defines the Internet threat model (passive and active attacks, eavesdropping, replay, man-in-the-middle, denial of service) and security goals (confidentiality, integrity, authentication). 
+**Security Considerations**: All IETF documents must include security analysis per {{-SECURITY-CONSIDERATIONS}}. This BCP defines the Internet threat model (passive and active attacks, eavesdropping, replay, man-in-the-middle, denial of service) and security goals (confidentiality, integrity, authentication).
 
 Attacks specific to agent use of the protocol described in the specification should be described in agent considerations, not in the security considerations section.
 
@@ -150,8 +150,8 @@ Avoid repeating guidance for implementers in the agent considerations section.
 Avoid providing "system prompts" or "agent job descriptions" in the agent considerations section.
 Examples of these frequently start with "You are a helpful assistant that..." or "You are a helpful assistant that...".
 
-Typically an agent that is processing an internet draft will already have somthing like these. 
-These prompts are more useful when feeding text directly to an LLM client. 
+Typically an agent that is processing an internet draft will already have somthing like these.
+These prompts are more useful when feeding text directly to an LLM client.
 
 
 ## Agent Considerations
