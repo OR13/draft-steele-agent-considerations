@@ -83,23 +83,36 @@ This document builds upon established IETF practices for consideration sections 
 
 {::boilerplate bcp14-tagged}
 
+Model Client:
+  : Also referred to as an LLM client. This is typically a lower level interface which takes input and produces output. The input is typically a prompt, and the output is typically a response.
+
+Agent:
+  : A software system that extends one or more model clients with context and tools. Frequently used to provide a user with a conversation interface to an assistant, which can retrieve information and use tools to interact with external systems.
+
+Agent Tools:
+  : Descriptons of software capabilities and input and output formats, that can be selected for use by agents in response to prompts. Tools typically provide agents with the ability to use limited subsets of existing software systems, for example an agent might choose to use a HTTP fetch tool to retrieve the content of an RFC from a URL.
+
+Context:
+  : The information that is available to an agent when it is responding to a prompt. Context is typically provided by the model client, and can include the prompt, the previous messages in the conversation, and the tools that are available to the agent.
+
+Coding Assistant:
+  : An agent that is used to assist developers in producing software implementations. Coding assistants are typically used to generate code from a specification. In the case that not specification exists, coding assistants respond to prompts and guidance from the developer to produce software.
+
 # Processing Considerations Sections
 
-IETF documents commonly include dedicated sections addressing security, privacy, and operational aspects of protocols and technologies. These consideration sections serve multiple critical purposes: they guide document authors in performing due diligence during protocol design, inform implementers and deployers about potential risks and design trade-offs, and provide structured guidance for agents assisting developers in producing software implementations.
+IETF documents commonly include dedicated sections addressing security, privacy, and operational aspects of protocols and technologies. These consideration sections serve multiple critical purposes: they guide document authors in performing due diligence during protocol design, inform implementers and deployers about potential risks and design trade-offs, and with the adoption of coding assistants, provide structured guidance for agents assisting developers in producing software implementations.
 
-## Value to Authors and Implementers
+Instead of mixing guidance for implementers and agents in each of these sections, this document recommends that guidance for coding assistants be centralized in an Agent Considerations section.
 
-When developing specifications that involve agents—whether autonomous systems, software agents, or AI-driven components—authors should carefully evaluate the applicability of established consideration frameworks. These frameworks provide systematic approaches to identifying and documenting design choices that affect security, privacy, and operations.
+It is appropriate to provide guidance to agents in the agent considerations section, that provides advice regarding how the other considerations sections should be processed, for example providing guidance on how tables in IANA considerations should be used to produce enumerations or lookup tables.
 
-**Security Considerations**: All IETF documents must include security analysis per {{-SECURITY-CONSIDERATIONS}}. This BCP defines the Internet threat model (passive and active attacks, eavesdropping, replay, man-in-the-middle, denial of service) and security goals (confidentiality, integrity, authentication). For agent-based systems, authors must document:
+**Security Considerations**: All IETF documents must include security analysis per {{-SECURITY-CONSIDERATIONS}}. This BCP defines the Internet threat model (passive and active attacks, eavesdropping, replay, man-in-the-middle, denial of service) and security goals (confidentiality, integrity, authentication). 
 
-- Threat modeling for autonomous decision-making and agent authority
-- Authentication and authorization mechanisms for agent actions
-- Protection against malicious agents or compromised agent behavior
-- Which attacks are in-scope versus out-of-scope and why
-- Cryptographic protections and their limitations
+Attacks specific to agent use of the protocol described in the specification should be described in agent considerations, not in the security considerations section.
 
-The structured threat analysis helps agents reading specifications identify security-critical code paths, understand attack surfaces, and generate appropriate security controls during implementation.
+Similarly guidance to agents regarding the safe interpretation of the specification should be described in agent considerations, and not repeated in the security considerations section.
+
+It is recommended to highlight parts of the security considerations section that are particularly relevant to prompt injection or context poisoning, in cases where protocol fields may be directly exposed to agents through tools such as MCP or A2A.
 
 **Privacy Considerations**: Agent systems often collect, process, or transmit data about individuals through automated mechanisms. {{-PRIVACY-CONSIDERATIONS}} provides a questionnaire-based framework for analyzing privacy implications across three mitigation areas:
 
@@ -156,6 +169,14 @@ Authors should assess which consideration sections are relevant to their specifi
 - How agent behavior can be monitored, configured, and controlled operationally
 
 The goal is to ensure that both human implementers and agents assisting with implementation have sufficient information to build secure, privacy-respecting, and operationally manageable systems.
+
+Avoid repeating guidance for implementers in the agent considerations section.
+
+Avoid providing "system prompts" or "agent job descriptions" in the agent considerations section.
+Examples of these frequently start with "You are a helpful assistant that..." or "You are a helpful assistant that...".
+
+Typically an agent that is processing an internet draft will already have somthing like these. 
+These prompts are more useful when feeding text directly to an LLM client. 
 
 
 ## Agent Considerations
