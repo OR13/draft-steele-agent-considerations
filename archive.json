@@ -1,0 +1,114 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2025-11-04T00:26:27.231339+00:00",
+  "repo": "OR13/draft-steele-agent-considerations",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOQNcVmc7VSrzu",
+      "title": "Add Template for Agent Consideration Section",
+      "url": "https://github.com/OR13/draft-steele-agent-considerations/issues/1",
+      "state": "OPEN",
+      "author": "henkbirkholz",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "At least including how to mark:\n* and reference examples an agent MUST take into account (maybe also SHOULD and MAY)\n* which authors, contributors, or acknowledgments to take into account by an agent\n* and reference which formal data model fragments or collation of data model to take into account",
+      "createdAt": "2025-11-01T20:56:55Z",
+      "updatedAt": "2025-11-01T20:56:55Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDOQNcVmc6xEG57",
+      "title": "Reduce A2A and MCP slop",
+      "url": "https://github.com/OR13/draft-steele-agent-considerations/pull/2",
+      "state": "MERGED",
+      "author": "OR13",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "reduce and format sections on these",
+      "createdAt": "2025-11-02T14:58:03Z",
+      "updatedAt": "2025-11-02T20:37:37Z",
+      "baseRepository": "OR13/draft-steele-agent-considerations",
+      "baseRefName": "main",
+      "baseRefOid": "c84038d416d5aedf0c1a23323d871e10139a4389",
+      "headRepository": "OR13/draft-steele-agent-considerations",
+      "headRefName": "slop-reduction",
+      "headRefOid": "062bdbb41cd04ea3510ab1e792d52ba7f5fc6476",
+      "closedAt": "2025-11-02T20:37:37Z",
+      "mergedAt": "2025-11-02T20:37:37Z",
+      "mergedBy": "henkbirkholz",
+      "mergeCommit": {
+        "oid": "0c7900f4b10ac8fb9bf28e0f950a08cc07653ce1"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOQNcVmc7LMMZY",
+          "commit": {
+            "abbreviatedOid": "062bdbb"
+          },
+          "author": "henkbirkholz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-11-02T20:37:27Z",
+          "updatedAt": "2025-11-02T20:37:27Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}
