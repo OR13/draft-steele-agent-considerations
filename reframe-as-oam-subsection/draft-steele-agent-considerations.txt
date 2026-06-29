@@ -5,8 +5,8 @@
 Network Working Group                                          O. Steele
 Internet-Draft                                              Tradeverifyd
 Intended status: Informational                               H. Birkholz
-Expires: 27 December 2026                                 Fraunhofer SIT
-                                                            25 June 2026
+Expires: 31 December 2026                                 Fraunhofer SIT
+                                                            29 June 2026
 
 
                           Agent Considerations
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 December 2026.
+   This Internet-Draft will expire on 31 December 2026.
 
 Copyright Notice
 
@@ -118,15 +118,19 @@ Table of Contents
    and produce high-quality implementations, they require structured,
    machine-parseable guidance that goes beyond human-readable prose.
 
-   Earlier work explored defining a new, top-level "Agent
-   Considerations" section, peer to the Security, Privacy, and
-   Operational Considerations.  Review feedback was that a new top-level
-   considerations section is not desirable, but that the underlying
-   guidance is valuable.  This document therefore defines "Agent
-   Considerations" as a sub-section of the Operations and Management
-   Considerations section described in [I-D.ietf-opsawg-rfc5706bis]
-   (which, when published, obsoletes [RFC5706]), so that authors address
-   AI agents within an existing section.
+   This document defines an "Agent Considerations" sub-section of the
+   Operations and Management Considerations section described in
+   [I-D.ietf-opsawg-rfc5706bis] (which, when published, obsoletes
+   [RFC5706]), so that authors address AI agents within an existing
+   section rather than a new top-level one.
+
+      |  Editor's note (to be removed before publication): Earlier work
+      |  explored defining a new, top-level "Agent Considerations"
+      |  section, peer to the Security, Privacy, and Operational
+      |  Considerations.  Review feedback was that a new top-level
+      |  considerations section is not desirable, but that the
+      |  underlying guidance is valuable; this revision adopts the sub-
+      |  section approach above in response.
 
    The agent-relevant guidance the Agent Considerations sub-section
    collects includes:
@@ -714,13 +718,18 @@ Table of Contents
               Claise, B., Clarke, J., Farrel, A., Barguil, S.,
               Pignataro, C., and R. Chen, "Guidelines for Considering
               Operations and Management in IETF Specifications", Work in
-              Progress, Internet-Draft, draft-ietf-opsawg-rfc5706bis-04,
-              15 March 2026, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-opsawg-rfc5706bis-04>.
+              Progress, Internet-Draft, draft-ietf-opsawg-rfc5706bis-05,
+              26 June 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-opsawg-rfc5706bis-05>.
 
-   [RFC2119]  "*** BROKEN REFERENCE ***".
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
 
-   [RFC8174]  "*** BROKEN REFERENCE ***".
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
 9.2.  Informative References
 
@@ -732,11 +741,21 @@ Table of Contents
               <https://modelcontextprotocol.io/
               specification/2025-06-18>.
 
-   [RFC3552]  "*** BROKEN REFERENCE ***".
+   [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
+              Text on Security Considerations", BCP 72, RFC 3552,
+              DOI 10.17487/RFC3552, July 2003,
+              <https://www.rfc-editor.org/rfc/rfc3552>.
 
-   [RFC5706]  "*** BROKEN REFERENCE ***".
+   [RFC5706]  Harrington, D., "Guidelines for Considering Operations and
+              Management of New Protocols and Protocol Extensions",
+              RFC 5706, DOI 10.17487/RFC5706, November 2009,
+              <https://www.rfc-editor.org/rfc/rfc5706>.
 
-   [RFC6973]  "*** BROKEN REFERENCE ***".
+   [RFC6973]  Cooper, A., Tschofenig, H., Aboba, B., Peterson, J.,
+              Morris, J., Hansen, M., and R. Smith, "Privacy
+              Considerations for Internet Protocols", RFC 6973,
+              DOI 10.17487/RFC6973, July 2013,
+              <https://www.rfc-editor.org/rfc/rfc6973>.
 
 Acknowledgments
 
