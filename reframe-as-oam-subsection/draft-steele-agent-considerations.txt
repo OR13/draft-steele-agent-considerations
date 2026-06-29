@@ -123,14 +123,12 @@ Table of Contents
    [I-D.ietf-opsawg-rfc5706bis] (which, when published, obsoletes
    [RFC5706]), so that authors address AI agents within an existing
    section rather than a new top-level one.
-
-      |  Editor's note (to be removed before publication): Earlier work
-      |  explored defining a new, top-level "Agent Considerations"
-      |  section, peer to the Security, Privacy, and Operational
-      |  Considerations.  Review feedback was that a new top-level
-      |  considerations section is not desirable, but that the
-      |  underlying guidance is valuable; this revision adopts the sub-
-      |  section approach above in response.
+   // Editor's note (to be removed before publication): Earlier work
+   // explored defining a new, top-level "Agent Considerations" section,
+   // peer to the Security, Privacy, and Operational Considerations.
+   // Review feedback was that a new top-level considerations section is
+   // not desirable, but that the underlying guidance is valuable; this
+   // revision adopts the sub-section approach in response.
 
    The agent-relevant guidance the Agent Considerations sub-section
    collects includes:
