@@ -67,7 +67,10 @@ IETF specifications serve as foundational documents for technical implementation
 
 In recent years, artificial intelligence (AI) agents have emerged as powerful tools for assisting developers in understanding and implementing IETF specifications. These agents can analyze specification text, extract normative requirements, understand protocol interactions, and generate code that conforms to the defined standards. However, for agents to effectively consume specifications and produce high-quality implementations, they require structured, machine-parseable guidance that goes beyond human-readable prose.
 
-Earlier work explored defining a new, top-level "Agent Considerations" section, peer to the Security, Privacy, and Operational Considerations. Review feedback was that a new top-level considerations section is not desirable, but that the underlying guidance is valuable. This document therefore defines "Agent Considerations" as a sub-section of the Operations and Management Considerations section described in {{-OPS-MGMT-BIS}} (which, when published, obsoletes {{RFC5706}}), so that authors address AI agents within an existing section.
+This document defines an "Agent Considerations" sub-section of the Operations and Management Considerations section described in {{-OPS-MGMT-BIS}} (which, when published, obsoletes {{RFC5706}}), so that authors address AI agents within an existing section rather than a new top-level one.
+
+> Editor's note (to be removed before publication): Earlier work explored defining a new, top-level "Agent Considerations" section, peer to the Security, Privacy, and Operational Considerations. Review feedback was that a new top-level considerations section is not desirable, but that the underlying guidance is valuable; this revision adopts the sub-section approach above in response.
+{:aside}
 
 The agent-relevant guidance the Agent Considerations sub-section collects includes:
 
