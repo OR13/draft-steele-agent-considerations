@@ -124,7 +124,6 @@ In particular:
 - Distinguish normative requirements from examples and implementation advice.
 - Identify schemas, annotated examples, and tests used to verify conformance.
 - Document language-specific constraints and media type handling where relevant.
-- Describe how agent behavior can be monitored, configured, and controlled.
 - Reference applicable security, privacy, and operational requirements.
 
 Do not include system prompts or agent job descriptions, such as "You are a helpful assistant".
