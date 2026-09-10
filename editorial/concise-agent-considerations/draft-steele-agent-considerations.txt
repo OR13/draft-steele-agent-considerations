@@ -183,9 +183,6 @@ Table of Contents
    *  Document language-specific constraints and media type handling
       where relevant.
 
-   *  Describe how agent behavior can be monitored, configured, and
-      controlled.
-
    *  Reference applicable security, privacy, and operational
       requirements.
 
