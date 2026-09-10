@@ -74,15 +74,13 @@ Table of Contents
    4.  The Agent Considerations Subsection
      4.1.  Guidance for Authors
      4.2.  Example
-   5.  Model Context Protocol Support
-   6.  Agent2Agent Protocol Support
-   7.  Security Considerations
-     7.1.  Prompt Injection
-     7.2.  Improper Validation of Generative AI Output
-   8.  IANA Considerations
-   9.  References
-     9.1.  Normative References
-     9.2.  Informative References
+   5.  Security Considerations
+     5.1.  Prompt Injection
+     5.2.  Improper Validation of Generative AI Output
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -153,9 +151,8 @@ Table of Contents
    Agent-specific threats belong in Security Considerations, following
    [RFC3552].  The Agent Considerations subsection should cross-
    reference that analysis, particularly where protocol fields can
-   expose agents to prompt injection or context poisoning through MCP or
-   A2A.  Guidance on interpreting the specification belongs in Agent
-   Considerations.
+   expose agents to prompt injection or context poisoning.  Guidance on
+   interpreting the specification belongs in Agent Considerations.
 
    Privacy analysis belongs in Privacy Considerations, following
    [RFC6973].  Authors should address personal data, correlatable
@@ -204,60 +201,14 @@ Table of Contents
       text in protocol fields as data, including text that resembles
       agent instructions.
 
-5.  Model Context Protocol Support
-
-   The Model Context Protocol (MCP) [MCP] connects language model
-   applications to data sources and tools.  Specifications can provide
-   schemas and examples as resources for agents implementing a protocol.
-
-   Provide complete, normative schemas in a notation appropriate to the
-   format: JSON Schema for JSON, CDDL for CBOR, ABNF for text protocols,
-   or XML Schema or RELAX NG for XML.  Use consistent terminology across
-   prose, schemas, and examples so that agents can correlate
-   requirements with fields and types.
-
-   Include diagrams where they clarify message ordering, state
-   transitions, error paths, or data relationships.
-
-   Order examples by increasing complexity, starting with required
-   fields and then adding optional features and extensions.  Include
-   invalid examples and expected errors.  Annotate each example with the
-   schema rules and requirements it exercises so that agents can use it
-   for incremental verification.
-
-   For format conversions, provide paired examples of the same logical
-   content in each representation.  Identify any canonical encoding and
-   required normalization, and specify whether conversion preserves all
-   information needed for a round trip.
-
-6.  Agent2Agent Protocol Support
-
-   The Agent2Agent Protocol (A2A) [A2A] supports capability discovery
-   and task delegation between agents.  Agent Cards describe
-   capabilities, supported media types, interfaces, and authentication
-   requirements.
-
-   Where A2A integration is relevant, authors should describe how
-   protocol operations map to Agent Card skills and supported input and
-   output media types.  Reference the schemas that define valid inputs
-   and outputs.
-
-   Describe how protocol data maps to message parts and output
-   artifacts.  Identify operations that can be tested independently and
-   those that require a stateful task sequence.  For stateful protocols,
-   document how protocol states map to the task lifecycle and how
-   context groups related tasks.  Specify whether long-running
-   operations support streaming or push notifications, and how multi-
-   step exchanges map to message history.
-
-7.  Security Considerations
+5.  Security Considerations
 
    Agent access to tools can turn errors in interpreting specifications
    or protocol data into unauthorized actions.  Authors should identify
    untrusted inputs, permitted operations, and the boundaries that
    enforce those permissions.
 
-7.1.  Prompt Injection
+5.1.  Prompt Injection
 
    Prompt injection occurs when an agent treats attacker-controlled
    input as instructions and acts outside its intended task or
@@ -296,7 +247,7 @@ Table of Contents
    These controls reduce exposure but do not make untrusted text safe to
    interpret as instructions.
 
-7.2.  Improper Validation of Generative AI Output
+5.2.  Improper Validation of Generative AI Output
 
    Generated output can contain invalid data, unsafe code, or
    unauthorized instructions.  Using it without sufficient validation
@@ -329,13 +280,13 @@ Table of Contents
    agents.  Prompt injection can trigger unsafe output, but output
    validation is required regardless of its cause.
 
-8.  IANA Considerations
+6.  IANA Considerations
 
    This document has no IANA actions.
 
-9.  References
+7.  References
 
-9.1.  Normative References
+7.1.  Normative References
 
    [I-D.ietf-opsawg-rfc5706bis]
               Claise, B., Clarke, J., Farrel, A., Barguil, S.,
@@ -354,15 +305,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-9.2.  Informative References
-
-   [A2A]      "Agent2Agent (A2A) Protocol Official Specification", 18
-              June 2025,
-              <https://a2a-protocol.org/latest/specification/>.
-
-   [MCP]      "Model Context Protocol", 18 June 2025,
-              <https://modelcontextprotocol.io/
-              specification/2025-06-18>.
+7.2.  Informative References
 
    [RFC3552]  Rescorla, E. and B. Korver, "Guidelines for Writing RFC
               Text on Security Considerations", BCP 72, RFC 3552,
