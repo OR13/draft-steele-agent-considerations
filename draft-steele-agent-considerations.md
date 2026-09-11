@@ -39,6 +39,7 @@ informative:
   RFC6973: PRIVACY-CONSIDERATIONS
   RFC3552: SECURITY-CONSIDERATIONS
   RFC5706: OPERATIONAL-CONSIDERATIONS
+  RFC7942: IMPLEMENTATION-STATUS
 
 
 ...
@@ -54,11 +55,16 @@ It provides guidance on schemas, examples, capability descriptions, and verifica
 # Introduction
 
 AI agents use IETF specifications to generate code and operate protocols.
+AI is also used to facilitate working group discussions and produce IETF drafts.
 Clear requirements, formal schemas, and annotated examples help agents produce implementations that can be tested for conformance.
 
 This document defines an Agent Considerations subsection of the Operations and Management Considerations section described in {{-OPS-MGMT-BIS}}.
 The subsection collects guidance for agents implementing and operating a protocol, including language- and grammar-specific constraints, media-type handling, capability descriptions, and verification.
 Security and privacy analysis remains in the corresponding considerations sections.
+
+Editor's note (to be removed before publication): This draft will be revised to incorporate guidance reflecting community consensus on whether and how Agent Considerations sections should address the use of agents in the specification development process itself.
+Such guidance would be analogous to the Implementation Status section described in BCP 205 {{-IMPLEMENTATION-STATUS}}, but limited to the use of agents to develop the specification.
+Discussions are continuing on the [ai-in-standards mailing list](https://mailman3.ietf.org/mailman3/lists/ai-in-standards.ietf.org/).
 
 # Conventions and Definitions
 
