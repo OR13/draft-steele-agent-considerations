@@ -229,4 +229,4 @@ This document has no IANA actions.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The authors thank Andrew Yourtchenko for his review and suggestions on shared human and agent pitfalls and the distinction between specification development and protocol operation.
