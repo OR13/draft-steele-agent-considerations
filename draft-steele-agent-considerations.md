@@ -57,7 +57,7 @@ AI agents use IETF specifications to generate code and operate protocols.
 Clear requirements, formal schemas, and annotated examples help agents produce implementations that can be tested for conformance.
 
 This document defines an Agent Considerations subsection of the Operations and Management Considerations section described in {{-OPS-MGMT-BIS}}.
-The subsection collects guidance for agents implementing and operating a protocol, including language-specific constraints, media type handling, capability descriptions, and verification.
+The subsection collects guidance for agents implementing and operating a protocol, including language- and grammar-specific constraints, media-type handling, capability descriptions, and verification.
 Security and privacy analysis remains in the corresponding considerations sections.
 
 # Conventions and Definitions
