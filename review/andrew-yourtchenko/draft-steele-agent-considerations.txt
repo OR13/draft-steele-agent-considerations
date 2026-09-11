@@ -425,7 +425,9 @@ Table of Contents
 
 Acknowledgments
 
-   TODO acknowledge.
+   The authors thank Andrew Yourtchenko for his review and suggestions
+   on shared human and agent pitfalls and the distinction between
+   specification development and protocol operation.
 
 Authors' Addresses
 
