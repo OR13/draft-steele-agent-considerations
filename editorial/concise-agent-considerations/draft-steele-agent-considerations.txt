@@ -5,8 +5,8 @@
 Network Working Group                                          O. Steele
 Internet-Draft                                              Tradeverifyd
 Intended status: Informational                               H. Birkholz
-Expires: 14 March 2027                                    Fraunhofer SIT
-                                                       10 September 2026
+Expires: 15 March 2027                                    Fraunhofer SIT
+                                                       11 September 2026
 
 
                           Agent Considerations
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 March 2027.
+   This Internet-Draft will expire on 15 March 2027.
 
 Copyright Notice
 
@@ -94,10 +94,10 @@ Table of Contents
    This document defines an Agent Considerations subsection of the
    Operations and Management Considerations section described in
    [I-D.ietf-opsawg-rfc5706bis].  The subsection collects guidance for
-   agents implementing and operating a protocol, including language-
-   specific constraints, media type handling, capability descriptions,
-   and verification.  Security and privacy analysis remains in the
-   corresponding considerations sections.
+   agents implementing and operating a protocol, including language- and
+   grammar-specific constraints, media-type handling, capability
+   descriptions, and verification.  Security and privacy analysis
+   remains in the corresponding considerations sections.
 
 2.  Conventions and Definitions
 
