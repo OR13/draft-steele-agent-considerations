@@ -95,10 +95,10 @@ Table of Contents
    This document defines an Agent Considerations subsection of the
    Operations and Management Considerations section described in
    [I-D.ietf-opsawg-rfc5706bis].  The subsection collects guidance for
-   agents implementing and operating a protocol, including language- and
-   grammar-specific constraints, media-type handling, capability
-   descriptions, and verification.  Security and privacy analysis
-   remains in the corresponding considerations sections.
+   agents implementing and operating a protocol, including language-
+   specific constraints, media type handling, capability descriptions,
+   and verification.  Security and privacy analysis remains in the
+   corresponding considerations sections.
 
    Editor's note (to be removed before publication): This draft will be
    revised to incorporate guidance reflecting community consensus on
