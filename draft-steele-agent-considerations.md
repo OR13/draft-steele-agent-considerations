@@ -62,7 +62,7 @@ This document defines an Agent Considerations subsection of the Operations and M
 The subsection collects guidance for agents implementing and operating a protocol, including language-specific constraints, media type handling, capability descriptions, and verification.
 Security and privacy analysis remains in the corresponding considerations sections.
 
-Editor's note (to be removed before publication): This draft will be revised to incorporate guidance reflecting community consensus on whether and how Agent Considerations sections should address the use of agents in the specification development process itself.
+Editor's note (to be removed before publication): This draft will be revised to incorporate guidance reflecting community consensus on whether and how Agent Considerations sections need to address the use of agents in the specification development process itself.
 Such guidance would be analogous to the Implementation Status section described in BCP 205 {{-IMPLEMENTATION-STATUS}}, but limited to the use of agents to develop the specification.
 Discussions are continuing on the [ai-in-standards mailing list](https://mailman3.ietf.org/mailman3/lists/ai-in-standards.ietf.org/).
 
@@ -96,20 +96,20 @@ Earlier versions of this document proposed a top-level section; this revision pl
 
 # The Agent Considerations Subsection
 
-Authors should place guidance for AI agents in an Agent Considerations subsection of Operations and Management Considerations.
-The subsection should explain how agents can use the specification to implement, configure, monitor, and verify a protocol.
-It should reference applicable requirements elsewhere in the document without repeating them.
+Authors SHOULD place guidance for AI agents in an Agent Considerations subsection of Operations and Management Considerations.
+The subsection SHOULD explain how agents can use the specification to implement, configure, monitor, and verify a protocol.
+It SHOULD reference applicable requirements elsewhere in the document without repeating them.
 For example, it can identify IANA tables used to generate enumerations or lookup tables.
 
 Agent-specific threats belong in Security Considerations, following {{-SECURITY-CONSIDERATIONS}}.
-The Agent Considerations subsection should cross-reference that analysis, particularly where protocol fields can expose agents to prompt injection or context poisoning.
+The Agent Considerations subsection SHOULD cross-reference that analysis, particularly where protocol fields can expose agents to prompt injection or context poisoning.
 Guidance on interpreting the specification belongs in Agent Considerations.
 
 Privacy analysis belongs in Privacy Considerations, following {{-PRIVACY-CONSIDERATIONS}}.
-Authors should address personal data, correlatable identifiers, consent, retention, and deletion, including risks from automated collection, profiling, and tracking.
-Agent Considerations should reference the resulting requirements.
+Authors SHOULD address personal data, correlatable identifiers, consent, retention, and deletion, including risks from automated collection, profiling, and tracking.
+Agent Considerations SHOULD reference the resulting requirements.
 
-Operational guidance should identify configuration constraints, monitoring metrics, fault detection, and management interfaces, as described in {{-OPERATIONAL-CONSIDERATIONS}} and {{-OPS-MGMT-BIS}}.
+Operational guidance SHOULD identify configuration constraints, monitoring metrics, fault detection, and management interfaces, as described in {{-OPERATIONAL-CONSIDERATIONS}} and {{-OPS-MGMT-BIS}}.
 These details also support generation of instrumentation and tests.
 
 ## Guidance for Authors
@@ -139,7 +139,7 @@ The following illustrates an Agent Considerations subsection for a protocol with
 # Security Considerations
 
 Agent access to tools can turn errors in interpreting specifications or protocol data into unauthorized actions.
-Authors should identify untrusted inputs, permitted operations, and the boundaries that enforce those permissions.
+Authors SHOULD identify untrusted inputs, permitted operations, and the boundaries that enforce those permissions.
 
 ## Prompt Injection
 
@@ -150,10 +150,10 @@ Direct injection places malicious instructions in a prompt.
 Indirect injection places them in material the agent consumes, such as documents, tool results, or protocol fields.
 Training-data poisoning is a related attack on model training rather than an injection into runtime context.
 
-Authors should identify fields that can carry attacker-controlled text and describe how that text reaches an agent.
+Authors SHOULD identify fields that can carry attacker-controlled text and describe how that text reaches an agent.
 Review specifications and configuration examples for hidden or ambiguous instructions before using them in automated workflows.
 
-Implementers should:
+Implementers SHOULD:
 
 - Enforce authorization and tool permissions outside the model.
 - Restrict code execution, file access, and network access with sandboxing and least privilege.
@@ -170,8 +170,8 @@ Generated output can contain invalid data, unsafe code, or unauthorized instruct
 Using it without sufficient validation can cause code execution, cross-site scripting, policy violations, or manipulation of downstream agents.
 This weakness is described in [CWE-1426](https://cwe.mitre.org/data/definitions/1426.html).
 
-Authors should specify output constraints, permitted downstream actions, security boundaries, and failure behavior.
-Implementers should:
+Authors SHOULD specify output constraints, permitted downstream actions, security boundaries, and failure behavior.
+Implementers SHOULD:
 
 - Validate output types, schemas, and semantic constraints before use.
 - Enforce authorization independently of the generating model.
@@ -181,8 +181,8 @@ Implementers should:
 - Test validators with adversarial outputs and boundary cases.
 
 Schema conformance does not establish that an output is safe or authorized.
-Validation should be independent of the model and enforced at each consuming interface, including interfaces between agents.
-Prompt injection can trigger unsafe output, but output validation is required regardless of its cause.
+Validation SHOULD be independent of the model and enforced at each consuming interface, including interfaces between agents.
+Prompt injection can trigger unsafe output, but output validation is REQUIRED regardless of its cause.
 
 # IANA Considerations
 
