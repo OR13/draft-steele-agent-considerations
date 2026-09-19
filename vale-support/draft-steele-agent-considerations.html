@@ -1213,7 +1213,7 @@ Clear requirements, formal schemas, and annotated examples help agents produce i
 <p id="section-1-2">This document defines an Agent Considerations subsection of the Operations and Management Considerations section described in <span>[<a href="#I-D.ietf-opsawg-rfc5706bis" class="cite xref">I-D.ietf-opsawg-rfc5706bis</a>]</span>.
 The subsection collects guidance for agents implementing and operating a protocol, including language-specific constraints, media type handling, capability descriptions, and verification.
 Security and privacy analysis remains in the corresponding considerations sections.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">Editor's note (to be removed before publication): This draft will be revised to incorporate guidance reflecting community consensus on whether and how Agent Considerations sections should address the use of agents in the specification development process itself.
+<p id="section-1-3">Editor's note (to be removed before publication): This draft will be revised to incorporate guidance reflecting community consensus on whether and how Agent Considerations sections need to address the use of agents in the specification development process itself.
 Such guidance would be analogous to the Implementation Status section described in BCP 205 <span>[<a href="#RFC7942" class="cite xref">RFC7942</a>]</span>, but limited to the use of agents to develop the specification.
 Discussions are continuing on the <a href="https://mailman3.ietf.org/mailman3/lists/ai-in-standards.ietf.org/">ai-in-standards mailing list</a>.<a href="#section-1-3" class="pilcrow">¶</a></p>
 </section>
@@ -1273,17 +1273,17 @@ Earlier versions of this document proposed a top-level section; this revision pl
       <h2 id="name-the-agent-considerations-su">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-the-agent-considerations-su" class="section-name selfRef">The Agent Considerations Subsection</a>
       </h2>
-<p id="section-4-1">Authors should place guidance for AI agents in an Agent Considerations subsection of Operations and Management Considerations.
-The subsection should explain how agents can use the specification to implement, configure, monitor, and verify a protocol.
-It should reference applicable requirements elsewhere in the document without repeating them.
+<p id="section-4-1">Authors <span class="bcp14">SHOULD</span> place guidance for AI agents in an Agent Considerations subsection of Operations and Management Considerations.
+The subsection <span class="bcp14">SHOULD</span> explain how agents can use the specification to implement, configure, monitor, and verify a protocol.
+It <span class="bcp14">SHOULD</span> reference applicable requirements elsewhere in the document without repeating them.
 For example, it can identify IANA tables used to generate enumerations or lookup tables.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">Agent-specific threats belong in Security Considerations, following <span>[<a href="#RFC3552" class="cite xref">RFC3552</a>]</span>.
-The Agent Considerations subsection should cross-reference that analysis, particularly where protocol fields can expose agents to prompt injection or context poisoning.
+The Agent Considerations subsection <span class="bcp14">SHOULD</span> cross-reference that analysis, particularly where protocol fields can expose agents to prompt injection or context poisoning.
 Guidance on interpreting the specification belongs in Agent Considerations.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">Privacy analysis belongs in Privacy Considerations, following <span>[<a href="#RFC6973" class="cite xref">RFC6973</a>]</span>.
-Authors should address personal data, correlatable identifiers, consent, retention, and deletion, including risks from automated collection, profiling, and tracking.
-Agent Considerations should reference the resulting requirements.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<p id="section-4-4">Operational guidance should identify configuration constraints, monitoring metrics, fault detection, and management interfaces, as described in <span>[<a href="#RFC5706" class="cite xref">RFC5706</a>]</span> and <span>[<a href="#I-D.ietf-opsawg-rfc5706bis" class="cite xref">I-D.ietf-opsawg-rfc5706bis</a>]</span>.
+Authors <span class="bcp14">SHOULD</span> address personal data, correlatable identifiers, consent, retention, and deletion, including risks from automated collection, profiling, and tracking.
+Agent Considerations <span class="bcp14">SHOULD</span> reference the resulting requirements.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">Operational guidance <span class="bcp14">SHOULD</span> identify configuration constraints, monitoring metrics, fault detection, and management interfaces, as described in <span>[<a href="#RFC5706" class="cite xref">RFC5706</a>]</span> and <span>[<a href="#I-D.ietf-opsawg-rfc5706bis" class="cite xref">I-D.ietf-opsawg-rfc5706bis</a>]</span>.
 These details also support generation of instrumentation and tests.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <div id="guidance-for-authors">
 <section id="section-4.1">
@@ -1336,7 +1336,7 @@ Treat text in protocol fields as data, including text that resembles agent instr
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-5-1">Agent access to tools can turn errors in interpreting specifications or protocol data into unauthorized actions.
-Authors should identify untrusted inputs, permitted operations, and the boundaries that enforce those permissions.<a href="#section-5-1" class="pilcrow">¶</a></p>
+Authors <span class="bcp14">SHOULD</span> identify untrusted inputs, permitted operations, and the boundaries that enforce those permissions.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="prompt-injection">
 <section id="section-5.1">
         <h3 id="name-prompt-injection">
@@ -1347,9 +1347,9 @@ Consequences include data disclosure, altered outputs, unauthorized tool use, an
 <p id="section-5.1-2">Direct injection places malicious instructions in a prompt.
 Indirect injection places them in material the agent consumes, such as documents, tool results, or protocol fields.
 Training-data poisoning is a related attack on model training rather than an injection into runtime context.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">Authors should identify fields that can carry attacker-controlled text and describe how that text reaches an agent.
+<p id="section-5.1-3">Authors <span class="bcp14">SHOULD</span> identify fields that can carry attacker-controlled text and describe how that text reaches an agent.
 Review specifications and configuration examples for hidden or ambiguous instructions before using them in automated workflows.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.1-4">Implementers should:<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">Implementers <span class="bcp14">SHOULD</span>:<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.1-5.1">
             <p id="section-5.1-5.1.1">Enforce authorization and tool permissions outside the model.<a href="#section-5.1-5.1.1" class="pilcrow">¶</a></p>
@@ -1381,8 +1381,8 @@ Review specifications and configuration examples for hidden or ambiguous instruc
 <p id="section-5.2-1">Generated output can contain invalid data, unsafe code, or unauthorized instructions.
 Using it without sufficient validation can cause code execution, cross-site scripting, policy violations, or manipulation of downstream agents.
 This weakness is described in <a href="https://cwe.mitre.org/data/definitions/1426.html">CWE-1426</a>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">Authors should specify output constraints, permitted downstream actions, security boundaries, and failure behavior.
-Implementers should:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">Authors <span class="bcp14">SHOULD</span> specify output constraints, permitted downstream actions, security boundaries, and failure behavior.
+Implementers <span class="bcp14">SHOULD</span>:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-3.1">
             <p id="section-5.2-3.1.1">Validate output types, schemas, and semantic constraints before use.<a href="#section-5.2-3.1.1" class="pilcrow">¶</a></p>
@@ -1404,8 +1404,8 @@ Implementers should:<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-5.2-4">Schema conformance does not establish that an output is safe or authorized.
-Validation should be independent of the model and enforced at each consuming interface, including interfaces between agents.
-Prompt injection can trigger unsafe output, but output validation is required regardless of its cause.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+Validation <span class="bcp14">SHOULD</span> be independent of the model and enforced at each consuming interface, including interfaces between agents.
+Prompt injection can trigger unsafe output, but output validation is <span class="bcp14">REQUIRED</span> regardless of its cause.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
