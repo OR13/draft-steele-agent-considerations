@@ -18,7 +18,7 @@ venue:
 #  group: WG
 #  type: Working Group
 #  mail: WG@example.com
-#  arch: https://example.com/WG
+#  arch: <https://example.com/WG>
   github: "OR13/draft-steele-agent-considerations"
   latest: "https://OR13.github.io/draft-steele-agent-considerations/draft-steele-agent-considerations.html"
 
