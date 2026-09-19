@@ -102,7 +102,7 @@ Table of Contents
 
    Editor's note (to be removed before publication): This draft will be
    revised to incorporate guidance reflecting community consensus on
-   whether and how Agent Considerations sections need to address the use
+   whether and how Agent Considerations sections should address the use
    of agents in the specification development process itself.  Such
    guidance would be analogous to the Implementation Status section
    described in BCP 205 [RFC7942], but limited to the use of agents to
@@ -151,27 +151,27 @@ Table of Contents
 
 4.  The Agent Considerations Subsection
 
-   Authors SHOULD place guidance for AI agents in an Agent
+   Authors should place guidance for AI agents in an Agent
    Considerations subsection of Operations and Management
-   Considerations.  The subsection SHOULD explain how agents can use the
+   Considerations.  The subsection should explain how agents can use the
    specification to implement, configure, monitor, and verify a
-   protocol.  It SHOULD reference applicable requirements elsewhere in
+   protocol.  It should reference applicable requirements elsewhere in
    the document without repeating them.  For example, it can identify
    IANA tables used to generate enumerations or lookup tables.
 
    Agent-specific threats belong in Security Considerations, following
-   [RFC3552].  The Agent Considerations subsection SHOULD cross-
+   [RFC3552].  The Agent Considerations subsection should cross-
    reference that analysis, particularly where protocol fields can
    expose agents to prompt injection or context poisoning.  Guidance on
    interpreting the specification belongs in Agent Considerations.
 
    Privacy analysis belongs in Privacy Considerations, following
-   [RFC6973].  Authors SHOULD address personal data, correlatable
+   [RFC6973].  Authors should address personal data, correlatable
    identifiers, consent, retention, and deletion, including risks from
    automated collection, profiling, and tracking.  Agent Considerations
-   SHOULD reference the resulting requirements.
+   should reference the resulting requirements.
 
-   Operational guidance SHOULD identify configuration constraints,
+   Operational guidance should identify configuration constraints,
    monitoring metrics, fault detection, and management interfaces, as
    described in [RFC5706] and [I-D.ietf-opsawg-rfc5706bis].  These
    details also support generation of instrumentation and tests.
@@ -215,7 +215,7 @@ Table of Contents
 5.  Security Considerations
 
    Agent access to tools can turn errors in interpreting specifications
-   or protocol data into unauthorized actions.  Authors SHOULD identify
+   or protocol data into unauthorized actions.  Authors should identify
    untrusted inputs, permitted operations, and the boundaries that
    enforce those permissions.
 
@@ -232,12 +232,12 @@ Table of Contents
    is a related attack on model training rather than an injection into
    runtime context.
 
-   Authors SHOULD identify fields that can carry attacker-controlled
+   Authors should identify fields that can carry attacker-controlled
    text and describe how that text reaches an agent.  Review
    specifications and configuration examples for hidden or ambiguous
    instructions before using them in automated workflows.
 
-   Implementers SHOULD:
+   Implementers should:
 
    *  Enforce authorization and tool permissions outside the model.
 
@@ -266,9 +266,9 @@ Table of Contents
    manipulation of downstream agents.  This weakness is described in
    CWE-1426 (https://cwe.mitre.org/data/definitions/1426.html).
 
-   Authors SHOULD specify output constraints, permitted downstream
+   Authors should specify output constraints, permitted downstream
    actions, security boundaries, and failure behavior.  Implementers
-   SHOULD:
+   should:
 
    *  Validate output types, schemas, and semantic constraints before
       use.
@@ -286,10 +286,10 @@ Table of Contents
    *  Test validators with adversarial outputs and boundary cases.
 
    Schema conformance does not establish that an output is safe or
-   authorized.  Validation SHOULD be independent of the model and
+   authorized.  Validation should be independent of the model and
    enforced at each consuming interface, including interfaces between
    agents.  Prompt injection can trigger unsafe output, but output
-   validation is REQUIRED regardless of its cause.
+   validation is required regardless of its cause.
 
 6.  IANA Considerations
 
